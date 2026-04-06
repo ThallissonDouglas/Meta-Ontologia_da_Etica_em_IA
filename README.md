@@ -70,14 +70,18 @@ Fornecer uma estrutura explícita para documentar os pressupostos éticos de um 
 ### Requisitos Funcionais: Grupos de Questões de Competência
 
 
-* **GQC1. Fundamentos da Agência Moral**\
+* **GQC1. Fundamentos da Agência Moral**
 
-**QC1.** Quais são os critérios necessários e suficientes para que um sistema de IA seja classificado como um Agente Moral?\
-**QC2.** O que constitui uma Ação Moral por parte de um sistema de IA? A omissão (não agir) é considerada uma ação moral?\
-**QC3.** Como se representa a responsabilidade em um sistema distribuído onde a decisão é fruto da interação entre IA e humano?\
+**QC1.** Quais são os critérios necessários e suficientes para que um sistema de IA seja classificado como um Agente Moral?
 
-* **GQC2. Normas, Valores e Deôntica**\
+**QC2.** O que constitui uma Ação Moral por parte de um sistema de IA? A omissão (não agir) é considerada uma ação moral?
 
-**QC4.** Como uma Norma ética (ex: "não causar dano") pode ser codificada como uma restrição lógica?\
-**QC5.** Como um Valor (ex: "privacidade") pode ser formalizado?\
-**QC6.** Como representar as relações deônticas: Obrigação (OBL), Permissão (PER) e Proibição (FORB) entre um agente e uma ação?\
+**QC3.** Como se representa a responsabilidade em um sistema distribuído onde a decisão é fruto da interação entre IA e humano?
+
+* **GQC2. Normas, Valores e Deôntica**
+
+**QC4.** Como uma Norma ética (ex: "não causar dano") pode ser codificada como uma restrição lógica?
+
+**QC5.** Como um Valor (ex: "privacidade") pode ser formalizado?
+
+**QC6.** Como representar as relações deônticas: Obrigação (OBL), Permissão (PER) e Proibição (FORB) entre um agente e uma ação?
