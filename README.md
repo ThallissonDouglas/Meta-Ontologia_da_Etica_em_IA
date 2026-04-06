@@ -71,6 +71,7 @@ Fornecer uma estrutura explícita para documentar os pressupostos éticos de um 
 
 | Fundamentos da Agência Moral |
 | --- | --- |
+| QC1. | Quais são os critérios necessários e suficientes para que um sistema de IA seja classificado como um Agente Moral? |
 
 GQC1. Fundamentos da Agência Moral
 QC1.
