@@ -1,4 +1,2 @@
 # Backup files
-*.bak
-*.bak_[000-999]d
-
+*.bak_*
