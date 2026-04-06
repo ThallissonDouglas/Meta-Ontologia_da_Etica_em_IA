@@ -69,7 +69,7 @@ Fornecer uma estrutura explícita para documentar os pressupostos éticos de um 
 
 ### Requisitos Funcionais: Grupos de Questões de Competência
 
-| Fundamentos da Agência Moral |
+| Fundamentos da Agência Moral | QC1 |
 | --- | --- |
 | QC1. | Quais são os critérios necessários e suficientes para que um sistema de IA seja classificado como um Agente Moral? |
 
