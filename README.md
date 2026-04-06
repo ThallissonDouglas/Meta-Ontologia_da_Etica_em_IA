@@ -14,16 +14,16 @@ A ontologia será implementada em uma linguagem formal que permita a representa�
 
 ## 4 Usuários Finais Planejados
 
-* Engenheiros e Desenvolvedores de IA\
+* **Engenheiros e Desenvolvedores de IA**\
 Para integar restrições éticas e valores no design de sistemas autônomos.
 
-* Especialistas em Ética e Filosofia\
+* **Especialistas em Ética e Filosofia**\
 Para formalizar teorias éticas de maneira precisa e testável.
 
-* Pesquisadores em IA Confiável (Trustworthy AI)\
+* **Pesquisadores em IA Confiável (Trustworthy AI)**\
 Para utilizar uma base conceitual comum na avaliação de alinhamento e segurança.
 
-* Arquitetos de Software e Ontologistas\
+* **Arquitetos de Software e Ontologistas**\
 Para construir aplicações ou estender a ontologia para domínios específicos.
 
 ## 5 Usos Planejados
