@@ -71,16 +71,34 @@ Fornecer uma base conceitual para mapear e comparar normas oriundas de diferente
 
 * **GQC1. Fundamentos da Agência Moral**
 
-**QC1.** Quais são os critérios necessários e suficientes para que um sistema de IA seja classificado como um Agente Moral?
+**QC1.** O que faz um dado agente ser classificado como um agente moral?
 
-**QC2.** O que constitui uma Ação Moral por parte de um sistema de IA? A omissão (não agir) é considerada uma ação moral?
+**QC2.** Quais normas um agente precisa para classificar uma ação como uma ação moral?
 
-**QC3.** Como se representa a responsabilidade em um sistema distribuído onde a decisão é fruto da interação entre IA e humano?
+**QC3.** É a omissão um tipo de ação moral?
 
-* **GQC2. Normas, Valores e Deôntica**
+* **GQC2. Ecossistema de IA e Responsabilidade**
 
-**QC4.** Como uma Norma ética (ex: "não causar dano") pode ser codificada como uma restrição lógica?
+**QC4.** O que é um ecossistema de IA?
 
-**QC5.** Como um Valor (ex: "privacidade") pode ser formalizado?
+**QC5.** O que é a responsabilidade moral em um ecossistema de IA?
 
-**QC6.** Como representar as relações deônticas: Obrigação (OBL), Permissão (PER) e Proibição (FORB) entre um agente e uma ação?
+**QC6.** Como responsabilidades são atribuídas em um ecossistema de IA?
+
+**QC7.** Quem atribui responsabilidades em um ecossistema de IA?
+
+* **GQC3. Normas, Valores e Deôntica**
+
+**QC8.** O que é uma norma ética no contexto da ontologia?
+
+**QC9.** Quais são os componentes lógicos necessários para definir uma norma ética?
+
+**QC10.** Qual norma ética se aplica a uma determinada ação em um contexto específico?
+
+**QC11.** Quais são os valores éticos?
+
+**QC12.** Quem define os valores éticos?
+
+**QC13.** Como um valor se relaciona com uma norma ética?
+
+**QC14.** Uma determinada ação é obrigatória, permitida ou proibida para um determinado agente?
