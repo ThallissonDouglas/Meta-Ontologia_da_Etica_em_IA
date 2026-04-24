@@ -50,24 +50,15 @@ Fornecer uma base conceitual para mapear e comparar normas oriundas de diferente
 
 ### Requisitos Não Funcionais
 
-**RNF1.** A ontologia deve garantir que não haja inconsistências formais, especialmente ao representar conjuntos de normas conflitantes (ex: uma ação ser obrigatória e proibida simultaneamente). Deve prever mecanismos para tratar conflitos deônticos.
+**RNF1.** A ontologia deve ser Localizável (_Findable_), atribuindo-lhe um identificador único, global e persistente (e.g., um DOI) e indexando os seus metadados em catálogos pesquisáveis.
 
-**RNF2.** Como uma meta-ontologia, deve ser facilmente extensível para domínios de aplicação específicos (ex: ética para veículos autônomos, para diagnóstico médico, etc.) sem a necessidade de modificar seus axiomas centrais.
+**RNF2.** A ontologia deve ser Acessível (_Accessible_), permitindo a obtenção dos seus artefactos (arquivos OWL, documentação) por meio de um protocolo padronizado e aberto (HTTPS). Dada a licença restrita que requer confirmação para uso, o protocolo pode incluir uma etapa de autenticação ou solicitação de acesso.
 
-**RNF3.** Deve existir uma documentação clara que rastreie cada elemento da ontologia (classe, propriedade) até o conceito filosófico que o originou, garantindo que as decisões de formalização sejam transparentes.
+**RNF3.** A ontologia deve ser Interoperável (_Interoperable_), empregando linguagens formais amplamente adotadas (OntoUML, OWL) e vinculando-se a vocabulários ou ontologias de referência que também sigam os princípios FAIR.
 
-**RNF4.** A ontologia deve possuir um identificador único e persistente, estar registrada em repositórios reconhecidos e ser descrita com metadados ricos que incluam nome, versão, autores e contexto de criação.
-
-**RNF5.** A ontologia deve estar disponível publicamente por meio de um repositório estável e acessível, utilizando protocolos abertos e, se necessário, oferecendo mecanismos de autenticação claros sem comprometer a descoberta básica dos metadados.
-
-**RNF6.** A ontologia deve utilizar linguagens formais padronizadas e adotar boas práticas de reutilização de vocabulários consolidados para facilitar a integração com outras ontologias e sistemas.
-
-**RNF7.** A ontologia deve ser disponibilizada sob uma licença restrita que exija permissão explícita para qualquer uso comercial do seu conteúdo, conter documentação que explique suas decisões de modelagem e estar estruturada de modo modular para permitir o uso de partes específicas em diferentes contextos.
-
-**RNF8.** Fornecer uma estrutura explícita para documentar os pressupostos éticos de um sistema de IA, de modo que as decisões de modelagem, valores assumidos e princípios morais adotados sejam claramente identificáveis e rastreáveis ao longo do ciclo de vida da ontologia.
+**RNF4.** A ontologia deve ser Reutilizável (_Reusable_), disponibilizando metadados ricos sobre proveniência, domínio e escopo, e especificando de forma inequívoca a sua licença de uso. A licença é restrita, exigindo confirmação explícita por parte do utilizador antes de qualquer aproveitamento, derivação ou redistribuição.
 
 ### Requisitos Funcionais: Grupos de Questões de Competência
-
 
 * **GQC1. Fundamentos da Agência Moral**
 
