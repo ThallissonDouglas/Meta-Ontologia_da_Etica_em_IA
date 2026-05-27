@@ -64,7 +64,7 @@ Fornecer uma base conceitual para mapear e comparar normas oriundas de diferente
 
 **QC1.** O que faz um dado agente ser classificado como um agente moral?
 
-**QC2.** Quais normas um agente precisa para classificar uma ação como uma ação moral?
+**QC2.** Como normas classificam uma ação como uma ação moral?
 
 **QC3.** É a omissão um tipo de ação moral?
 
