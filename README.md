@@ -84,7 +84,7 @@ Fornecer uma base conceitual para mapear e comparar normas oriundas de diferente
 
 **QC9.** Quais são os componentes lógicos necessários para definir uma norma ética?
 
-**QC10.** Qual norma ética se aplica a uma determinada ação em um contexto específico?
+**QC10.** Qual norma ética se aplica a uma determinada ação?
 
 **QC11.** Quais são os valores éticos?
 
