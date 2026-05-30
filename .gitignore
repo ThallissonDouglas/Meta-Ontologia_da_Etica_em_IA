@@ -3,3 +3,5 @@
 
 # Local instance
 *.lck
+*.png
+/Modelo OntoUML/Backup

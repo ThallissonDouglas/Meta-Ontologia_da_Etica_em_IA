@@ -1,0 +1,258 @@
+@prefix : <http://example.com#>.
+@prefix gufo: <http://purl.org/nemo/gufo#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+<http://example.com> rdf:type owl:Ontology;
+    owl:imports gufo:.
+:Agente rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "Agente"@en.
+:AgenteHumano rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "AgenteHumano"@en.
+:AgenteArtificial rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "AgenteArtificial"@en.
+:AgenteMoral rdf:type owl:Class, gufo:Role, owl:NamedIndividual;
+    rdfs:label "AgenteMoral"@en.
+:Acao rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Event;
+    rdfs:label "Acao"@en.
+:AcaoMoral rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:label "AcaoMoral"@en.
+:AplicacaoNormativa rdf:type owl:Class, gufo:SituationType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Situation;
+    rdfs:label "AplicacaoNormativa"@en.
+:Norma rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Relator;
+    rdfs:label "Norma"@en.
+:DefinicaoNormativa rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Relator;
+    rdfs:label "DefinicaoNormativa"@en.
+:Valor rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Quality;
+    rdfs:label "Valor"@en.
+:RestricaoDeontica rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:IntrinsicMode;
+    rdfs:label "RestricaoDeontica"@en.
+:Proibicao rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "Proibicao"@en.
+:Obrigacao rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "Obrigacao"@en.
+:Permissao rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "Permissao"@en.
+:Beneficencia rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "Beneficencia"@en.
+:Justica rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "Justica"@en.
+:NaoMaleficencia rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "NaoMaleficencia"@en.
+:Usuario rdf:type owl:Class, gufo:Role, owl:NamedIndividual;
+    rdfs:label "Usuario"@en.
+:Especialista rdf:type owl:Class, gufo:Role, owl:NamedIndividual;
+    rdfs:label "Especialista"@en.
+:AgenteColetivo rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "AgenteColetivo"@en.
+:OrgaoRegulador rdf:type owl:Class, gufo:Role, owl:NamedIndividual;
+    rdfs:label "OrgaoRegulador"@en.
+:EcossistemaDeIA rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Relator;
+    rdfs:label "EcossistemaDeIA"@en.
+:Responsabilizacao rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Relator;
+    rdfs:label "Responsabilizacao"@en.
+:AplicacaoDeResponsabilidade rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Event;
+    rdfs:label "AplicacaoDeResponsabilidade"@en.
+:QuebraNormativa rdf:type owl:Class, gufo:SituationType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Situation;
+    rdfs:label "QuebraNormativa"@en.
+:AgenteArtificial rdfs:subClassOf :Agente.
+:AgenteHumano rdfs:subClassOf :Agente.
+:AgenteMoral rdfs:subClassOf :Agente.
+:AcaoMoral rdfs:subClassOf :Acao.
+:Permissao rdfs:subClassOf :RestricaoDeontica.
+:Proibicao rdfs:subClassOf :RestricaoDeontica.
+:Obrigacao rdfs:subClassOf :RestricaoDeontica.
+:Beneficencia rdfs:subClassOf :Valor.
+:NaoMaleficencia rdfs:subClassOf :Valor.
+:Justica rdfs:subClassOf :Valor.
+:Usuario rdfs:subClassOf :AgenteHumano.
+:Especialista rdfs:subClassOf :AgenteHumano.
+:AgenteColetivo rdfs:subClassOf :Agente.
+:OrgaoRegulador rdfs:subClassOf :AgenteColetivo.
+:tem_prioridade_sobre rdf:type owl:ObjectProperty;
+    rdfs:domain :Norma;
+    rdfs:range :Norma;
+    rdfs:label "tem_prioridade_sobre"@en;
+    rdf:type gufo:ComparativeRelationshipType.
+:fundamenta rdf:type owl:ObjectProperty;
+    rdfs:domain :Valor;
+    rdfs:range :Norma;
+    rdfs:label "fundamenta"@en;
+    rdf:type gufo:MaterialRelationshipType.
+:interage_com rdf:type owl:ObjectProperty;
+    rdfs:domain :Usuario;
+    rdfs:range :AgenteArtificial;
+    rdfs:label "interage_com"@en;
+    rdf:type gufo:MaterialRelationshipType.
+:ecossistemaDeIaHasAcao rdf:type owl:ObjectProperty;
+    rdfs:domain :EcossistemaDeIA;
+    rdfs:range :Acao.
+:responsabiliza rdf:type owl:ObjectProperty;
+    rdfs:domain :OrgaoRegulador;
+    rdfs:range :Agente;
+    rdfs:label "responsabiliza"@en;
+    rdf:type gufo:MaterialRelationshipType.
+:AcaoMoral rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:participatedIn ];
+  owl:someValuesFrom :AgenteMoral
+].
+:AplicacaoNormativa rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:broughtAbout ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :Acao
+].
+:Acao rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:broughtAbout;
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :AplicacaoNormativa
+].
+:AcaoMoral rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:contributedToTrigger ];
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :AplicacaoNormativa
+].
+:AplicacaoNormativa rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:contributedToTrigger;
+  owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :AcaoMoral
+].
+:AgenteMoral rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:mediates ];
+  owl:someValuesFrom :Norma
+].
+:Norma rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger;
+  owl:onClass :AgenteMoral
+].
+:AcaoMoral rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:manifestedIn ];
+  owl:someValuesFrom :Norma
+].
+:DefinicaoNormativa rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :Valor
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :Norma
+].
+:Norma rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:inheresIn ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :RestricaoDeontica
+].
+:RestricaoDeontica rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:inheresIn;
+  owl:someValuesFrom :Norma
+].
+:AgenteArtificial rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:mediates ];
+  owl:someValuesFrom :EcossistemaDeIA
+].
+:EcossistemaDeIA rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :AgenteArtificial
+].
+:Usuario rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:mediates ];
+  owl:someValuesFrom :EcossistemaDeIA
+].
+:EcossistemaDeIA rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :Usuario
+].
+:Acao rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:participatedIn ];
+  owl:someValuesFrom :Usuario
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:wasCreatedIn ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :AgenteArtificial
+].
+:OrgaoRegulador rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:mediates ];
+  owl:someValuesFrom :Responsabilizacao
+].
+:Responsabilizacao rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :OrgaoRegulador
+].
+:Agente rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:mediates ];
+  owl:someValuesFrom :Responsabilizacao
+].
+:Responsabilizacao rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :Agente
+].
+:AplicacaoDeResponsabilidade rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:manifestedIn ];
+  owl:someValuesFrom :Responsabilizacao
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:participatedIn ];
+  owl:someValuesFrom :Agente
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:participatedIn ];
+  owl:someValuesFrom :OrgaoRegulador
+].
+:QuebraNormativa rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:historicallyDependsOn;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :AplicacaoNormativa
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:contributedToTrigger ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :AplicacaoDeResponsabilidade
+].
+:AplicacaoDeResponsabilidade rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:contributedToTrigger;
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :QuebraNormativa
+].
