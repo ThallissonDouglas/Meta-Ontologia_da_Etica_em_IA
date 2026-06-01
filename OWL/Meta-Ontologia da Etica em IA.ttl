@@ -92,47 +92,30 @@
     rdfs:range :Norma;
     rdfs:label "fundamenta"@en;
     rdf:type gufo:MaterialRelationshipType.
-:interage_com rdf:type owl:ObjectProperty;
-    rdfs:domain :Usuario;
-    rdfs:range :AgenteArtificial;
-    rdfs:label "interage_com"@en;
-    rdf:type gufo:MaterialRelationshipType.
-:ecossistemaDeIaHasAcao rdf:type owl:ObjectProperty;
-    rdfs:domain :EcossistemaDeIA;
-    rdfs:range :Acao.
 :responsabiliza rdf:type owl:ObjectProperty;
     rdfs:domain :OrgaoRegulador;
     rdfs:range :Agente;
     rdfs:label "responsabiliza"@en;
     rdf:type gufo:MaterialRelationshipType.
+:redige rdf:type owl:ObjectProperty;
+    rdfs:domain :Especialista;
+    rdfs:range :Norma;
+    rdfs:label "redige"@en;
+    rdf:type gufo:MaterialRelationshipType.
+:se_baseia_em rdf:type owl:ObjectProperty;
+    rdfs:domain :Especialista;
+    rdfs:range :Valor;
+    rdfs:label "se_baseia_em"@en;
+    rdf:type gufo:MaterialRelationshipType.
+:interage_com rdf:type owl:ObjectProperty;
+    rdfs:domain :Usuario;
+    rdfs:range :AgenteArtificial;
+    rdfs:label "interage_com"@en;
+    rdf:type gufo:MaterialRelationshipType.
 :AcaoMoral rdfs:subClassOf [
   rdf:type owl:Restriction;
   owl:onProperty [ owl:inverseOf gufo:participatedIn ];
   owl:someValuesFrom :AgenteMoral
-].
-:AplicacaoNormativa rdfs:subClassOf [
-  rdf:type owl:Restriction;
-  owl:onProperty [ owl:inverseOf gufo:broughtAbout ];
-  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
-  owl:onClass :Acao
-].
-:Acao rdfs:subClassOf [
-  rdf:type owl:Restriction;
-  owl:onProperty gufo:broughtAbout;
-  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
-  owl:onClass :AplicacaoNormativa
-].
-:AcaoMoral rdfs:subClassOf [
-  rdf:type owl:Restriction;
-  owl:onProperty [ owl:inverseOf gufo:contributedToTrigger ];
-  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
-  owl:onClass :AplicacaoNormativa
-].
-:AplicacaoNormativa rdfs:subClassOf [
-  rdf:type owl:Restriction;
-  owl:onProperty gufo:contributedToTrigger;
-  owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger;
-  owl:onClass :AcaoMoral
 ].
 :AgenteMoral rdfs:subClassOf [
   rdf:type owl:Restriction;
@@ -196,13 +179,8 @@
 ].
 :Acao rdfs:subClassOf [
   rdf:type owl:Restriction;
-  owl:onProperty [ owl:inverseOf gufo:participatedIn ];
-  owl:someValuesFrom :Usuario
-], [
-  rdf:type owl:Restriction;
-  owl:onProperty [ owl:inverseOf gufo:wasCreatedIn ];
-  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
-  owl:onClass :AgenteArtificial
+  owl:onProperty [ owl:inverseOf gufo:manifestedIn ];
+  owl:someValuesFrom :EcossistemaDeIA
 ].
 :OrgaoRegulador rdfs:subClassOf [
   rdf:type owl:Restriction;
@@ -239,20 +217,30 @@
   owl:onProperty [ owl:inverseOf gufo:participatedIn ];
   owl:someValuesFrom :OrgaoRegulador
 ].
-:QuebraNormativa rdfs:subClassOf [
+:Especialista rdfs:subClassOf [
   rdf:type owl:Restriction;
-  owl:onProperty gufo:historicallyDependsOn;
-  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
-  owl:onClass :AplicacaoNormativa
-], [
-  rdf:type owl:Restriction;
-  owl:onProperty [ owl:inverseOf gufo:contributedToTrigger ];
-  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
-  owl:onClass :AplicacaoDeResponsabilidade
+  owl:onProperty [ owl:inverseOf gufo:mediates ];
+  owl:someValuesFrom :DefinicaoNormativa
 ].
-:AplicacaoDeResponsabilidade rdfs:subClassOf [
+:DefinicaoNormativa rdfs:subClassOf [
   rdf:type owl:Restriction;
-  owl:onProperty gufo:contributedToTrigger;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :Especialista
+].
+:Acao rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:wasCreatedIn ];
   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
-  owl:onClass :QuebraNormativa
+  owl:onClass :AgenteArtificial
+].
+:AgenteArtificial rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:wasCreatedIn;
+  owl:someValuesFrom :Acao
+].
+:Acao rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:participatedIn ];
+  owl:someValuesFrom :Usuario
 ].
