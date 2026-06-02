@@ -72,7 +72,7 @@ Fornecer uma base conceitual para mapear e comparar normas oriundas de diferente
 
 **QC4.** O que é um ecossistema de IA?
 
-**QC5.** O que é a responsabilidade moral em um ecossistema de IA?
+**QC5.** O que é a responsabilidade em um ecossistema de IA?
 
 **QC6.** Como responsabilidades são atribuídas em um ecossistema de IA?
 
