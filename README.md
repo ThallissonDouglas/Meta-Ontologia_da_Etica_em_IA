@@ -93,3 +93,17 @@ Fornecer uma base conceitual para mapear e comparar normas oriundas de diferente
 **QC13.** Como um valor se relaciona com uma norma ética?
 
 **QC14.** Uma determinada ação é obrigatória, permitida ou proibida para um determinado agente?
+
+## Visões do Modelo OntoUML
+
+![Visão 1 - Agencia e Ação](/Modelo OntoUML/Visões/Visão 1 - Agencia e Ação.png)
+
+![Visão 2 - Estrutura Normativa](/Modelo OntoUML/Visões/Visão 2 - Estrutura Normativa.png)
+
+![Visão 3 - Ecossistema de IA](/Modelo OntoUML/Visões/Visão 3 - Ecossistema de IA.png)
+
+![Visão 4 - Atribuição de Responsabilidade](/Modelo OntoUML/Visões/Visão 4 - Atribuição de Responsabilidade.png)
+
+## Problemas Encontrados Durante Converção
+
+

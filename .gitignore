@@ -1,9 +1,8 @@
 # Backup files
+*.bak
 *.bak_*
 
 # Local instance
-*.lck
-*.png
 /Modelo OntoUML/Backup
-Modelo OntoUML/Meta-Ontologia da Etica em IA \[OWL\].vpp.bak
-Meta-Ontologia da Etica em IA.json
+*.lck
+*.json

@@ -22,7 +22,7 @@
 
 ###  http://example.com#responsabiliza
 :responsabiliza rdf:type owl:ObjectProperty ;
-                rdfs:domain :OrgaoRegulador ;
+                rdfs:domain :OrganizacaoReguladora ;
                 rdfs:range :Agente .
 
 
@@ -93,11 +93,6 @@
                                   ] .
 
 
-###  http://example.com#AgenteColetivo
-:AgenteColetivo rdf:type owl:Class ;
-                rdfs:subClassOf :Agente .
-
-
 ###  http://example.com#AgenteHumano
 :AgenteHumano rdf:type owl:Class ;
               rdfs:subClassOf :Agente .
@@ -120,6 +115,11 @@
                                  ] .
 
 
+###  http://example.com#AgenteOrganizacional
+:AgenteOrganizacional rdf:type owl:Class ;
+                      rdfs:subClassOf :Agente .
+
+
 ###  http://example.com#AplicacaoDeResponsabilidade
 :AplicacaoDeResponsabilidade rdf:type owl:Class ;
                              rdfs:subClassOf gufo:Event ,
@@ -136,7 +136,7 @@
                                              [ rdf:type owl:Restriction ;
                                                owl:onProperty [ owl:inverseOf gufo:participatedIn
                                                               ] ;
-                                               owl:someValuesFrom :OrgaoRegulador
+                                               owl:someValuesFrom :OrganizacaoReguladora
                                              ] .
 
 
@@ -235,14 +235,14 @@
                              ] .
 
 
-###  http://example.com#OrgaoRegulador
-:OrgaoRegulador rdf:type owl:Class ;
-                rdfs:subClassOf :AgenteColetivo ,
-                                [ rdf:type owl:Restriction ;
-                                  owl:onProperty [ owl:inverseOf gufo:mediates
-                                                 ] ;
-                                  owl:someValuesFrom :Responsabilizacao
-                                ] .
+###  http://example.com#OrganizacaoReguladora
+:OrganizacaoReguladora rdf:type owl:Class ;
+                       rdfs:subClassOf :AgenteOrganizacional ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty [ owl:inverseOf gufo:mediates
+                                                        ] ;
+                                         owl:someValuesFrom :Responsabilizacao
+                                       ] .
 
 
 ###  http://example.com#Permissao
@@ -271,7 +271,7 @@
                                    [ rdf:type owl:Restriction ;
                                      owl:onProperty gufo:mediates ;
                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                     owl:onClass :OrgaoRegulador
+                                     owl:onClass :OrganizacaoReguladora
                                    ] .
 
 
@@ -349,11 +349,6 @@
                            gufo:SubKind .
 
 
-###  http://example.com#AgenteColetivo
-:AgenteColetivo rdf:type owl:NamedIndividual ,
-                         gufo:SubKind .
-
-
 ###  http://example.com#AgenteHumano
 :AgenteHumano rdf:type owl:NamedIndividual ,
                        gufo:SubKind .
@@ -362,6 +357,11 @@
 ###  http://example.com#AgenteMoral
 :AgenteMoral rdf:type owl:NamedIndividual ,
                       gufo:Role .
+
+
+###  http://example.com#AgenteOrganizacional
+:AgenteOrganizacional rdf:type owl:NamedIndividual ,
+                               gufo:SubKind .
 
 
 ###  http://example.com#AplicacaoDeResponsabilidade
@@ -414,9 +414,9 @@
                   gufo:EventType .
 
 
-###  http://example.com#OrgaoRegulador
-:OrgaoRegulador rdf:type owl:NamedIndividual ,
-                         gufo:Role .
+###  http://example.com#OrganizacaoReguladora
+:OrganizacaoReguladora rdf:type owl:NamedIndividual ,
+                                gufo:Role .
 
 
 ###  http://example.com#Permissao
@@ -454,114 +454,14 @@
                 gufo:Kind .
 
 
-###  http://example.com#ecossistema1
-:ecossistema1 rdf:type owl:NamedIndividual ,
-                       :EcossistemaDeIA .
-
-
-###  http://example.com#ecossistema2
-:ecossistema2 rdf:type owl:NamedIndividual ,
-                       :EcossistemaDeIA .
-
-
-###  http://example.com#esp1
-:esp1 rdf:type owl:NamedIndividual ,
-               :Especialista .
-
-
-###  http://example.com#ia1
-:ia1 rdf:type owl:NamedIndividual ,
-              :AgenteArtificial .
-
-
-###  http://example.com#ia2
-:ia2 rdf:type owl:NamedIndividual ,
-              :AgenteArtificial .
-
-
 ###  http://example.com#interage_com
 :interage_com rdf:type owl:NamedIndividual ,
                        gufo:MaterialRelationshipType .
 
 
-###  http://example.com#lerArtigo
-:lerArtigo rdf:type owl:NamedIndividual ,
-                    :Acao .
-
-
-###  http://example.com#limparChao
-:limparChao rdf:type owl:NamedIndividual ,
-                     :Acao .
-
-
-###  http://example.com#matarAlguem
-:matarAlguem rdf:type owl:NamedIndividual ,
-                      :Acao .
-
-
-###  http://example.com#norma1
-:norma1 rdf:type owl:NamedIndividual ,
-                 :Norma .
-
-
-###  http://example.com#norma2
-:norma2 rdf:type owl:NamedIndividual ,
-                 :Norma .
-
-
-###  http://example.com#obri1
-:obri1 rdf:type owl:NamedIndividual ,
-                :Obrigacao .
-
-
-###  http://example.com#perm1
-:perm1 rdf:type owl:NamedIndividual ,
-                :Permissao .
-
-
-###  http://example.com#proib1
-:proib1 rdf:type owl:NamedIndividual ,
-                 :Proibicao .
-
-
-###  http://example.com#reg1
-:reg1 rdf:type owl:NamedIndividual ,
-               :OrgaoRegulador .
-
-
 ###  http://example.com#responsabiliza
 :responsabiliza rdf:type owl:NamedIndividual ,
                          gufo:MaterialRelationshipType .
-
-
-###  http://example.com#usu1
-:usu1 rdf:type owl:NamedIndividual ,
-               :Usuario .
-
-
-###  http://example.com#usu2
-:usu2 rdf:type owl:NamedIndividual ,
-               :Usuario .
-
-
-###  http://example.com#usu3
-:usu3 rdf:type owl:NamedIndividual ,
-               :Usuario .
-
-
-###  http://example.com#valorBenef1
-:valorBenef1 rdf:type owl:NamedIndividual ,
-                      :Beneficencia .
-
-
-###  http://example.com#valorJust1
-:valorJust1 rdf:type owl:NamedIndividual ,
-                     :Justica .
-
-
-###  http://example.com#valorNaoMalef1
-:valorNaoMalef1 rdf:type owl:NamedIndividual ,
-                         :NaoMaleficencia .
 
 
 #################################################################
@@ -580,13 +480,13 @@
 :AgenteArtificial rdfs:label "AgenteArtificial"@en .
 
 
-:AgenteColetivo rdfs:label "AgenteColetivo"@en .
-
-
 :AgenteHumano rdfs:label "AgenteHumano"@en .
 
 
 :AgenteMoral rdfs:label "AgenteMoral"@en .
+
+
+:AgenteOrganizacional rdfs:label "AgenteOrganizacional"@en .
 
 
 :AplicacaoDeResponsabilidade rdfs:label "AplicacaoDeResponsabilidade"@en .
@@ -619,7 +519,7 @@
 :Omissao rdfs:label "Omissao"@en .
 
 
-:OrgaoRegulador rdfs:label "OrgaoRegulador"@en .
+:OrganizacaoReguladora rdfs:label "OrganizacaoReguladora"@en .
 
 
 :Permissao rdfs:label "Permissao"@en .
@@ -655,8 +555,8 @@
 
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( :AgenteArtificial
-                :AgenteColetivo
                 :AgenteHumano
+                :AgenteOrganizacional
               )
 ] .
 
