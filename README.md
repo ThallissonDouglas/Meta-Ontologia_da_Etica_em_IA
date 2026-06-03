@@ -96,13 +96,13 @@ Fornecer uma base conceitual para mapear e comparar normas oriundas de diferente
 
 ## Visões do Modelo OntoUML
 
-![Visão 1 - Agencia e Ação](/Modelo OntoUML/Visões/Visão 1 - Agencia e Ação.png)
+![Visão 1 - Agencia e Ação](./Modelo%20OntoUML/Visões/Visão%201%20-%20Agencia%20e%20Ação.png)
 
-![Visão 2 - Estrutura Normativa](/Modelo OntoUML/Visões/Visão 2 - Estrutura Normativa.png)
+![Visão 2 - Estrutura Normativa](./Modelo%20OntoUML/Visões/Visão%202%20-%20Estrutura%20Normativa.png)
 
-![Visão 3 - Ecossistema de IA](/Modelo OntoUML/Visões/Visão 3 - Ecossistema de IA.png)
+![Visão 3 - Ecossistema de IA](./Modelo%20OntoUML/Visões/Visão%203%20-%20Ecossistema%20de%20IA.png)
 
-![Visão 4 - Atribuição de Responsabilidade](/Modelo OntoUML/Visões/Visão 4 - Atribuição de Responsabilidade.png)
+![Visão 4 - Atribuição de Responsabilidade](./Modelo%20OntoUML/Visões/Visão%204%20-%20Atribuição%20de%20Responsabilidade.png)
 
 ## Problemas Encontrados Durante Converção
 
