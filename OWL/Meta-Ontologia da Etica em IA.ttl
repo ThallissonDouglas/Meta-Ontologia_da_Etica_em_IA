@@ -44,7 +44,7 @@
                         owl:someValuesFrom :Usuario
                       ] ,
                       [ rdf:type owl:Restriction ;
-                        owl:onProperty [ owl:inverseOf gufo:wasCreatedIn
+                        owl:onProperty [ owl:inverseOf gufo:participatedIn
                                        ] ;
                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onClass :AgenteArtificial
@@ -83,7 +83,7 @@
 :AgenteArtificial rdf:type owl:Class ;
                   rdfs:subClassOf :Agente ,
                                   [ rdf:type owl:Restriction ;
-                                    owl:onProperty gufo:wasCreatedIn ;
+                                    owl:onProperty gufo:participatedIn ;
                                     owl:someValuesFrom :Acao
                                   ] ,
                                   [ rdf:type owl:Restriction ;
@@ -226,7 +226,7 @@
 :Omissao rdf:type owl:Class ;
          owl:equivalentClass [ owl:intersectionOf ( :AcaoMoral
                                                     [ rdf:type owl:Restriction ;
-                                                      owl:onProperty [ owl:inverseOf gufo:wasCreatedIn
+                                                      owl:onProperty [ owl:inverseOf gufo:manifestedIn
                                                                      ] ;
                                                       owl:someValuesFrom :Proibicao
                                                     ]
@@ -252,12 +252,7 @@
 
 ###  http://example.com#Proibicao
 :Proibicao rdf:type owl:Class ;
-           rdfs:subClassOf :RestricaoDeontica ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty gufo:wasCreatedIn ;
-                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                             owl:onClass :Omissao
-                           ] .
+           rdfs:subClassOf :RestricaoDeontica .
 
 
 ###  http://example.com#QuebraNormativa
@@ -459,14 +454,114 @@
                 gufo:Kind .
 
 
+###  http://example.com#ecossistema1
+:ecossistema1 rdf:type owl:NamedIndividual ,
+                       :EcossistemaDeIA .
+
+
+###  http://example.com#ecossistema2
+:ecossistema2 rdf:type owl:NamedIndividual ,
+                       :EcossistemaDeIA .
+
+
+###  http://example.com#esp1
+:esp1 rdf:type owl:NamedIndividual ,
+               :Especialista .
+
+
+###  http://example.com#ia1
+:ia1 rdf:type owl:NamedIndividual ,
+              :AgenteArtificial .
+
+
+###  http://example.com#ia2
+:ia2 rdf:type owl:NamedIndividual ,
+              :AgenteArtificial .
+
+
 ###  http://example.com#interage_com
 :interage_com rdf:type owl:NamedIndividual ,
                        gufo:MaterialRelationshipType .
 
 
+###  http://example.com#lerArtigo
+:lerArtigo rdf:type owl:NamedIndividual ,
+                    :Acao .
+
+
+###  http://example.com#limparChao
+:limparChao rdf:type owl:NamedIndividual ,
+                     :Acao .
+
+
+###  http://example.com#matarAlguem
+:matarAlguem rdf:type owl:NamedIndividual ,
+                      :Acao .
+
+
+###  http://example.com#norma1
+:norma1 rdf:type owl:NamedIndividual ,
+                 :Norma .
+
+
+###  http://example.com#norma2
+:norma2 rdf:type owl:NamedIndividual ,
+                 :Norma .
+
+
+###  http://example.com#obri1
+:obri1 rdf:type owl:NamedIndividual ,
+                :Obrigacao .
+
+
+###  http://example.com#perm1
+:perm1 rdf:type owl:NamedIndividual ,
+                :Permissao .
+
+
+###  http://example.com#proib1
+:proib1 rdf:type owl:NamedIndividual ,
+                 :Proibicao .
+
+
+###  http://example.com#reg1
+:reg1 rdf:type owl:NamedIndividual ,
+               :OrgaoRegulador .
+
+
 ###  http://example.com#responsabiliza
 :responsabiliza rdf:type owl:NamedIndividual ,
                          gufo:MaterialRelationshipType .
+
+
+###  http://example.com#usu1
+:usu1 rdf:type owl:NamedIndividual ,
+               :Usuario .
+
+
+###  http://example.com#usu2
+:usu2 rdf:type owl:NamedIndividual ,
+               :Usuario .
+
+
+###  http://example.com#usu3
+:usu3 rdf:type owl:NamedIndividual ,
+               :Usuario .
+
+
+###  http://example.com#valorBenef1
+:valorBenef1 rdf:type owl:NamedIndividual ,
+                      :Beneficencia .
+
+
+###  http://example.com#valorJust1
+:valorJust1 rdf:type owl:NamedIndividual ,
+                     :Justica .
+
+
+###  http://example.com#valorNaoMalef1
+:valorNaoMalef1 rdf:type owl:NamedIndividual ,
+                         :NaoMaleficencia .
 
 
 #################################################################
