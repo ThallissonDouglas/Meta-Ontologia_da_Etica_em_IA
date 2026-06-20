@@ -1,0 +1,892 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.com#"
+     xml:base="http://example.com"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:gufo="http://purl.org/nemo/gufo#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:terms="http://purl.org/dc/terms/">
+    <owl:Ontology rdf:about="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#">
+        <owl:imports rdf:resource="http://purl.org/nemo/gufo#"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##interage_com -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/net/ethical-ai/meta##interage_com">
+        <rdfs:domain rdf:resource="http://purl.org/net/ethical-ai/meta##Usuario"/>
+        <rdfs:range rdf:resource="http://purl.org/net/ethical-ai/meta##AgenteArtificial"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##responsabiliza -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/net/ethical-ai/meta##responsabiliza">
+        <rdfs:domain rdf:resource="http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora"/>
+        <rdfs:range rdf:resource="http://purl.org/net/ethical-ai/meta##Agente"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Acao -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Acao">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Event"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#manifestedIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##EcossistemaDeIA"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#participatedIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Usuario"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#participatedIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##AgenteArtificial"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AcaoMoral -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##AcaoMoral">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Acao"/>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#manifestedIn"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Norma"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#participatedIn"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##AgenteMoral"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Agente -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Agente">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#mediates"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Responsabilizacao"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AgenteArtificial -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##AgenteArtificial">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##Agente"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#participatedIn"/>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Acao"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#mediates"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##EcossistemaDeIA"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AgenteHumano -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##AgenteHumano">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##Agente"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AgenteMoral -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##AgenteMoral">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Agente"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#participatedIn"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##AcaoMoral"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#mediates"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Norma"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AgenteOrganizacional -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##AgenteOrganizacional">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##Agente"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AplicacaoDeResponsabilidade -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##AplicacaoDeResponsabilidade">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Event"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#manifestedIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Responsabilizacao"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#participatedIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Agente"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#participatedIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AplicacaoNormativa -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##AplicacaoNormativa">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Event"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#wasCreatedIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##Norma"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Beneficencia -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Beneficencia">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##Valor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##EcossistemaDeIA -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##EcossistemaDeIA">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Relator"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#mediates"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##AgenteArtificial"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#mediates"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##Usuario"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Especialista -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Especialista">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##AgenteHumano"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Justica -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Justica">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##Valor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##NaoMaleficencia -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##NaoMaleficencia">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##Valor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Norma -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Norma">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Relator"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#inheresIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Valor"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#historicallyDependsOn"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##Especialista"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#mediates"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##AgenteMoral"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#wasCreatedIn"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##AplicacaoNormativa"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#inheresIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##RestricaoDeontica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Obrigacao -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Obrigacao">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##RestricaoDeontica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Omissao -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Omissao">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AcaoMoral"/>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#manifestedIn"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Proibicao"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##AgenteOrganizacional"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#mediates"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Responsabilizacao"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Permissao -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Permissao">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##RestricaoDeontica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Proibicao -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Proibicao">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##RestricaoDeontica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##QuebraNormativa -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##QuebraNormativa">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Situation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Responsabilizacao -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Responsabilizacao">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Relator"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#mediates"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##Agente"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#mediates"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##RestricaoDeontica -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##RestricaoDeontica">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Obrigacao"/>
+                    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Permissao"/>
+                    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Proibicao"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#IntrinsicMode"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#historicallyDependsOn"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##Especialista"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#inheresIn"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##Norma"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Usuario -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Usuario">
+        <rdfs:subClassOf rdf:resource="http://purl.org/net/ethical-ai/meta##AgenteHumano"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#participatedIn"/>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##Acao"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#mediates"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta##EcossistemaDeIA"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Valor -->
+
+    <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta##Valor">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Quality"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#historicallyDependsOn"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##Especialista"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#inheresIn"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta##Norma"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Acao -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Acao">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AcaoMoral -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##AcaoMoral">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Agente -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Agente">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AgenteArtificial -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##AgenteArtificial">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AgenteHumano -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##AgenteHumano">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AgenteMoral -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##AgenteMoral">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Role"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AgenteOrganizacional -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##AgenteOrganizacional">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AplicacaoDeResponsabilidade -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##AplicacaoDeResponsabilidade">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##AplicacaoNormativa -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##AplicacaoNormativa">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Beneficencia -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Beneficencia">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##EcossistemaDeIA -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##EcossistemaDeIA">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Especialista -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Especialista">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Role"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Justica -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Justica">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##NaoMaleficencia -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##NaoMaleficencia">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Norma -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Norma">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Obrigacao -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Obrigacao">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Omissao -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Omissao">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Role"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Permissao -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Permissao">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Proibicao -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Proibicao">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##QuebraNormativa -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##QuebraNormativa">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SituationType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Responsabilizacao -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Responsabilizacao">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##RestricaoDeontica -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##RestricaoDeontica">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Usuario -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Usuario">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Role"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##Valor -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##Valor">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##interage_com -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##interage_com">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#MaterialRelationshipType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/net/ethical-ai/meta##responsabiliza -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta##responsabiliza">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#MaterialRelationshipType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Acao">
+        <rdfs:label xml:lang="en">Acao</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AcaoMoral">
+        <rdfs:label xml:lang="en">AcaoMoral</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Agente">
+        <rdfs:label xml:lang="en">Agente</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AgenteArtificial">
+        <rdfs:label xml:lang="en">AgenteArtificial</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AgenteHumano">
+        <rdfs:label xml:lang="en">AgenteHumano</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AgenteMoral">
+        <rdfs:label xml:lang="en">AgenteMoral</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AgenteOrganizacional">
+        <rdfs:label xml:lang="en">AgenteOrganizacional</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AplicacaoDeResponsabilidade">
+        <rdfs:label xml:lang="en">AplicacaoDeResponsabilidade</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AplicacaoNormativa">
+        <rdfs:label xml:lang="en">AplicacaoNormativa</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Beneficencia">
+        <rdfs:label xml:lang="en">Beneficencia</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##EcossistemaDeIA">
+        <rdfs:label xml:lang="en">EcossistemaDeIA</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Especialista">
+        <rdfs:label xml:lang="en">Especialista</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Justica">
+        <rdfs:label xml:lang="en">Justica</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##NaoMaleficencia">
+        <rdfs:label xml:lang="en">NaoMaleficencia</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Norma">
+        <rdfs:label xml:lang="en">Norma</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Obrigacao">
+        <rdfs:label xml:lang="en">Obrigacao</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Omissao">
+        <rdfs:label xml:lang="en">Omissao</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora">
+        <rdfs:label xml:lang="en">OrganizacaoReguladora</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Permissao">
+        <rdfs:label xml:lang="en">Permissao</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Proibicao">
+        <rdfs:label xml:lang="en">Proibicao</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##QuebraNormativa">
+        <rdfs:label xml:lang="en">QuebraNormativa</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Responsabilizacao">
+        <rdfs:label xml:lang="en">Responsabilizacao</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##RestricaoDeontica">
+        <rdfs:label xml:lang="en">RestricaoDeontica</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Usuario">
+        <rdfs:label xml:lang="en">Usuario</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Valor">
+        <rdfs:label xml:lang="en">Valor</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##interage_com">
+        <rdfs:label xml:lang="en">interage_com</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##responsabiliza">
+        <rdfs:label xml:lang="en">responsabiliza</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AgenteArtificial"/>
+            <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AgenteHumano"/>
+            <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##AgenteOrganizacional"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Obrigacao"/>
+            <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Permissao"/>
+            <rdf:Description rdf:about="http://purl.org/net/ethical-ai/meta##Proibicao"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
