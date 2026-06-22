@@ -7,546 +7,537 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @base <http://example.com#> .
 
-<http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#> rdf:type owl:Ontology ;
-                                                           owl:imports gufo: .
+<http://purl.org/net/ethical-ai/meta-ontologia-etica-ia> rdf:type owl:Ontology ;
+                                                          owl:imports gufo: .
 
 #################################################################
 #    Object Properties
 #################################################################
 
-###  http://purl.org/net/ethical-ai/meta##interage_com
-<http://purl.org/net/ethical-ai/meta##interage_com> rdf:type owl:ObjectProperty ;
-                                                    rdfs:domain <http://purl.org/net/ethical-ai/meta##Usuario> ;
-                                                    rdfs:range <http://purl.org/net/ethical-ai/meta##AgenteArtificial> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#interage_com
+:interage_com rdf:type owl:ObjectProperty ;
+              rdfs:domain :Usuario ;
+              rdfs:range :AgenteArtificial .
 
 
-###  http://purl.org/net/ethical-ai/meta##responsabiliza
-<http://purl.org/net/ethical-ai/meta##responsabiliza> rdf:type owl:ObjectProperty ;
-                                                      rdfs:domain <http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora> ;
-                                                      rdfs:range <http://purl.org/net/ethical-ai/meta##Agente> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#responsabiliza
+:responsabiliza rdf:type owl:ObjectProperty ;
+                rdfs:domain :OrganizacaoReguladora ;
+                rdfs:range :Agente .
 
 
 #################################################################
 #    Classes
 #################################################################
 
-###  http://purl.org/net/ethical-ai/meta##Acao
-<http://purl.org/net/ethical-ai/meta##Acao> rdf:type owl:Class ;
-                                            rdfs:subClassOf gufo:Event ,
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty [ owl:inverseOf gufo:manifestedIn
-                                                                             ] ;
-                                                              owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##EcossistemaDeIA>
-                                                            ] ,
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty [ owl:inverseOf gufo:participatedIn
-                                                                             ] ;
-                                                              owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Usuario>
-                                                            ] ,
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty [ owl:inverseOf gufo:participatedIn
-                                                                             ] ;
-                                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                              owl:onClass <http://purl.org/net/ethical-ai/meta##AgenteArtificial>
-                                                            ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Acao
+:Acao rdf:type owl:Class ;
+      rdfs:subClassOf gufo:Event ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                       ] ;
+                        owl:someValuesFrom :EcossistemaDeIA
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                       ] ;
+                        owl:someValuesFrom :Usuario
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                       ] ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :AgenteArtificial
+                      ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##AcaoMoral
-<http://purl.org/net/ethical-ai/meta##AcaoMoral> rdf:type owl:Class ;
-                                                 owl:equivalentClass [ owl:intersectionOf ( <http://purl.org/net/ethical-ai/meta##Acao>
-                                                                                            [ rdf:type owl:Restriction ;
-                                                                                              owl:onProperty [ owl:inverseOf gufo:manifestedIn
-                                                                                                             ] ;
-                                                                                              owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Norma>
-                                                                                            ]
-                                                                                            [ rdf:type owl:Restriction ;
-                                                                                              owl:onProperty [ owl:inverseOf gufo:participatedIn
-                                                                                                             ] ;
-                                                                                              owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##AgenteMoral>
-                                                                                            ]
-                                                                                          ) ;
-                                                                       rdf:type owl:Class
-                                                                     ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AcaoMoral
+:AcaoMoral rdf:type owl:Class ;
+           rdfs:subClassOf :Acao ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                            ] ;
+                             owl:someValuesFrom :Norma
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                            ] ;
+                             owl:someValuesFrom :AgenteMoral
+                           ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##Agente
-<http://purl.org/net/ethical-ai/meta##Agente> rdf:type owl:Class ;
-                                              rdfs:subClassOf gufo:FunctionalComplex ,
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty [ owl:inverseOf gufo:mediates
-                                                                               ] ;
-                                                                owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Responsabilizacao>
-                                                              ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Agente
+:Agente rdf:type owl:Class ;
+        rdfs:subClassOf gufo:FunctionalComplex ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty [ owl:inverseOf gufo:mediates
+                                         ] ;
+                          owl:someValuesFrom :Responsabilizacao
+                        ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##AgenteArtificial
-<http://purl.org/net/ethical-ai/meta##AgenteArtificial> rdf:type owl:Class ;
-                                                        rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##Agente> ,
-                                                                        [ rdf:type owl:Restriction ;
-                                                                          owl:onProperty gufo:participatedIn ;
-                                                                          owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Acao>
-                                                                        ] ,
-                                                                        [ rdf:type owl:Restriction ;
-                                                                          owl:onProperty [ owl:inverseOf gufo:mediates
-                                                                                         ] ;
-                                                                          owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##EcossistemaDeIA>
-                                                                        ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteArtificial
+:AgenteArtificial rdf:type owl:Class ;
+                  rdfs:subClassOf :Agente ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty gufo:participatedIn ;
+                                    owl:someValuesFrom :Acao
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty [ owl:inverseOf gufo:mediates
+                                                   ] ;
+                                    owl:someValuesFrom :EcossistemaDeIA
+                                  ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##AgenteHumano
-<http://purl.org/net/ethical-ai/meta##AgenteHumano> rdf:type owl:Class ;
-                                                    rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##Agente> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteHumano
+:AgenteHumano rdf:type owl:Class ;
+              rdfs:subClassOf :Agente .
 
 
-###  http://purl.org/net/ethical-ai/meta##AgenteMoral
-<http://purl.org/net/ethical-ai/meta##AgenteMoral> rdf:type owl:Class ;
-                                                   owl:equivalentClass [ owl:intersectionOf ( <http://purl.org/net/ethical-ai/meta##Agente>
-                                                                                              [ rdf:type owl:Restriction ;
-                                                                                                owl:onProperty gufo:participatedIn ;
-                                                                                                owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##AcaoMoral>
-                                                                                              ]
-                                                                                              [ rdf:type owl:Restriction ;
-                                                                                                owl:onProperty [ owl:inverseOf gufo:mediates
-                                                                                                               ] ;
-                                                                                                owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Norma>
-                                                                                              ]
-                                                                                            ) ;
-                                                                         rdf:type owl:Class
-                                                                       ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteMoral
+:AgenteMoral rdf:type owl:Class ;
+             rdfs:subClassOf :Agente ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gufo:participatedIn ;
+                               owl:someValuesFrom :AcaoMoral
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty [ owl:inverseOf gufo:mediates
+                                              ] ;
+                               owl:someValuesFrom :Norma
+                             ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##AgenteOrganizacional
-<http://purl.org/net/ethical-ai/meta##AgenteOrganizacional> rdf:type owl:Class ;
-                                                            rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##Agente> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteOrganizacional
+:AgenteOrganizacional rdf:type owl:Class ;
+                      rdfs:subClassOf :Agente .
 
 
-###  http://purl.org/net/ethical-ai/meta##AplicacaoDeResponsabilidade
-<http://purl.org/net/ethical-ai/meta##AplicacaoDeResponsabilidade> rdf:type owl:Class ;
-                                                                   rdfs:subClassOf gufo:Event ,
-                                                                                   [ rdf:type owl:Restriction ;
-                                                                                     owl:onProperty [ owl:inverseOf gufo:manifestedIn
-                                                                                                    ] ;
-                                                                                     owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Responsabilizacao>
-                                                                                   ] ,
-                                                                                   [ rdf:type owl:Restriction ;
-                                                                                     owl:onProperty [ owl:inverseOf gufo:participatedIn
-                                                                                                    ] ;
-                                                                                     owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Agente>
-                                                                                   ] ,
-                                                                                   [ rdf:type owl:Restriction ;
-                                                                                     owl:onProperty [ owl:inverseOf gufo:participatedIn
-                                                                                                    ] ;
-                                                                                     owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora>
-                                                                                   ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoDeResponsabilidade
+:AplicacaoDeResponsabilidade rdf:type owl:Class ;
+                             rdfs:subClassOf gufo:Event ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                                              ] ;
+                                               owl:someValuesFrom :Responsabilizacao
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                              ] ;
+                                               owl:someValuesFrom :Agente
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                              ] ;
+                                               owl:someValuesFrom :OrganizacaoReguladora
+                                             ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##AplicacaoNormativa
-<http://purl.org/net/ethical-ai/meta##AplicacaoNormativa> rdf:type owl:Class ;
-                                                          rdfs:subClassOf gufo:Event ,
-                                                                          [ rdf:type owl:Restriction ;
-                                                                            owl:onProperty [ owl:inverseOf gufo:wasCreatedIn
-                                                                                           ] ;
-                                                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                            owl:onClass <http://purl.org/net/ethical-ai/meta##Norma>
-                                                                          ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa
+:AplicacaoNormativa rdf:type owl:Class ;
+                    rdfs:subClassOf gufo:Event ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:wasCreatedIn
+                                                     ] ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :Norma
+                                    ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##Beneficencia
-<http://purl.org/net/ethical-ai/meta##Beneficencia> rdf:type owl:Class ;
-                                                    rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##Valor> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Beneficencia
+:Beneficencia rdf:type owl:Class ;
+              rdfs:subClassOf :Valor .
 
 
-###  http://purl.org/net/ethical-ai/meta##EcossistemaDeIA
-<http://purl.org/net/ethical-ai/meta##EcossistemaDeIA> rdf:type owl:Class ;
-                                                       rdfs:subClassOf gufo:Relator ,
-                                                                       [ rdf:type owl:Restriction ;
-                                                                         owl:onProperty gufo:mediates ;
-                                                                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                         owl:onClass <http://purl.org/net/ethical-ai/meta##AgenteArtificial>
-                                                                       ] ,
-                                                                       [ rdf:type owl:Restriction ;
-                                                                         owl:onProperty gufo:mediates ;
-                                                                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                         owl:onClass <http://purl.org/net/ethical-ai/meta##Usuario>
-                                                                       ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#EcossistemaDeIA
+:EcossistemaDeIA rdf:type owl:Class ;
+                 rdfs:subClassOf gufo:Relator ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gufo:mediates ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :AgenteArtificial
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gufo:mediates ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :Usuario
+                                 ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##Especialista
-<http://purl.org/net/ethical-ai/meta##Especialista> rdf:type owl:Class ;
-                                                    rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##AgenteHumano> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Especialista
+:Especialista rdf:type owl:Class ;
+              rdfs:subClassOf :AgenteHumano .
 
 
-###  http://purl.org/net/ethical-ai/meta##Justica
-<http://purl.org/net/ethical-ai/meta##Justica> rdf:type owl:Class ;
-                                               rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##Valor> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Justica
+:Justica rdf:type owl:Class ;
+         rdfs:subClassOf :Valor .
 
 
-###  http://purl.org/net/ethical-ai/meta##NaoMaleficencia
-<http://purl.org/net/ethical-ai/meta##NaoMaleficencia> rdf:type owl:Class ;
-                                                       rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##Valor> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#NaoMaleficencia
+:NaoMaleficencia rdf:type owl:Class ;
+                 rdfs:subClassOf :Valor .
 
 
-###  http://purl.org/net/ethical-ai/meta##Norma
-<http://purl.org/net/ethical-ai/meta##Norma> rdf:type owl:Class ;
-                                             rdfs:subClassOf gufo:Relator ,
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty [ owl:inverseOf gufo:inheresIn
-                                                                              ] ;
-                                                               owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Valor>
-                                                             ] ,
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty gufo:historicallyDependsOn ;
-                                                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                               owl:onClass <http://purl.org/net/ethical-ai/meta##Especialista>
-                                                             ] ,
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty gufo:mediates ;
-                                                               owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-                                                               owl:onClass <http://purl.org/net/ethical-ai/meta##AgenteMoral>
-                                                             ] ,
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty gufo:wasCreatedIn ;
-                                                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                               owl:onClass <http://purl.org/net/ethical-ai/meta##AplicacaoNormativa>
-                                                             ] ,
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty [ owl:inverseOf gufo:inheresIn
-                                                                              ] ;
-                                                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                               owl:onClass <http://purl.org/net/ethical-ai/meta##RestricaoDeontica>
-                                                             ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Norma
+:Norma rdf:type owl:Class ;
+       rdfs:subClassOf gufo:Relator ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                        ] ;
+                         owl:someValuesFrom :Valor
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty gufo:historicallyDependsOn ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Especialista
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty gufo:mediates ;
+                         owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                         owl:onClass :AgenteMoral
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty gufo:wasCreatedIn ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :AplicacaoNormativa
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                        ] ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :RestricaoDeontica
+                       ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##Obrigacao
-<http://purl.org/net/ethical-ai/meta##Obrigacao> rdf:type owl:Class ;
-                                                 rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##RestricaoDeontica> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Obrigacao
+:Obrigacao rdf:type owl:Class ;
+           rdfs:subClassOf :RestricaoDeontica .
 
 
-###  http://purl.org/net/ethical-ai/meta##Omissao
-<http://purl.org/net/ethical-ai/meta##Omissao> rdf:type owl:Class ;
-                                               owl:equivalentClass [ owl:intersectionOf ( <http://purl.org/net/ethical-ai/meta##AcaoMoral>
-                                                                                          [ rdf:type owl:Restriction ;
-                                                                                            owl:onProperty [ owl:inverseOf gufo:manifestedIn
-                                                                                                           ] ;
-                                                                                            owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Proibicao>
-                                                                                          ]
-                                                                                        ) ;
-                                                                     rdf:type owl:Class
-                                                                   ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Omissao
+:Omissao rdf:type owl:Class ;
+         rdfs:subClassOf :AcaoMoral ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                          ] ;
+                           owl:someValuesFrom :Proibicao
+                         ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora
-<http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora> rdf:type owl:Class ;
-                                                             rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##AgenteOrganizacional> ,
-                                                                             [ rdf:type owl:Restriction ;
-                                                                               owl:onProperty [ owl:inverseOf gufo:mediates
-                                                                                              ] ;
-                                                                               owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Responsabilizacao>
-                                                                             ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#OrganizacaoReguladora
+:OrganizacaoReguladora rdf:type owl:Class ;
+                       rdfs:subClassOf :AgenteOrganizacional ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty [ owl:inverseOf gufo:mediates
+                                                        ] ;
+                                         owl:someValuesFrom :Responsabilizacao
+                                       ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##Permissao
-<http://purl.org/net/ethical-ai/meta##Permissao> rdf:type owl:Class ;
-                                                 rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##RestricaoDeontica> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Permissao
+:Permissao rdf:type owl:Class ;
+           rdfs:subClassOf :RestricaoDeontica .
 
 
-###  http://purl.org/net/ethical-ai/meta##Proibicao
-<http://purl.org/net/ethical-ai/meta##Proibicao> rdf:type owl:Class ;
-                                                 rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##RestricaoDeontica> .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Proibicao
+:Proibicao rdf:type owl:Class ;
+           rdfs:subClassOf :RestricaoDeontica .
 
 
-###  http://purl.org/net/ethical-ai/meta##QuebraNormativa
-<http://purl.org/net/ethical-ai/meta##QuebraNormativa> rdf:type owl:Class ;
-                                                       rdfs:subClassOf gufo:Situation .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#QuebraNormativa
+:QuebraNormativa rdf:type owl:Class ;
+                 rdfs:subClassOf gufo:Situation .
 
 
-###  http://purl.org/net/ethical-ai/meta##Responsabilizacao
-<http://purl.org/net/ethical-ai/meta##Responsabilizacao> rdf:type owl:Class ;
-                                                         rdfs:subClassOf gufo:Relator ,
-                                                                         [ rdf:type owl:Restriction ;
-                                                                           owl:onProperty gufo:mediates ;
-                                                                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                           owl:onClass <http://purl.org/net/ethical-ai/meta##Agente>
-                                                                         ] ,
-                                                                         [ rdf:type owl:Restriction ;
-                                                                           owl:onProperty gufo:mediates ;
-                                                                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                           owl:onClass <http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora>
-                                                                         ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Responsabilizacao
+:Responsabilizacao rdf:type owl:Class ;
+                   rdfs:subClassOf gufo:Relator ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gufo:mediates ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :Agente
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gufo:mediates ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :OrganizacaoReguladora
+                                   ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##RestricaoDeontica
-<http://purl.org/net/ethical-ai/meta##RestricaoDeontica> rdf:type owl:Class ;
-                                                         owl:equivalentClass [ rdf:type owl:Class ;
-                                                                               owl:unionOf ( <http://purl.org/net/ethical-ai/meta##Obrigacao>
-                                                                                             <http://purl.org/net/ethical-ai/meta##Permissao>
-                                                                                             <http://purl.org/net/ethical-ai/meta##Proibicao>
-                                                                                           )
-                                                                             ] ;
-                                                         rdfs:subClassOf gufo:IntrinsicMode ,
-                                                                         [ rdf:type owl:Restriction ;
-                                                                           owl:onProperty gufo:historicallyDependsOn ;
-                                                                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                           owl:onClass <http://purl.org/net/ethical-ai/meta##Especialista>
-                                                                         ] ,
-                                                                         [ rdf:type owl:Restriction ;
-                                                                           owl:onProperty gufo:inheresIn ;
-                                                                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                           owl:onClass <http://purl.org/net/ethical-ai/meta##Norma>
-                                                                         ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#RestricaoDeontica
+:RestricaoDeontica rdf:type owl:Class ;
+                   owl:equivalentClass [ rdf:type owl:Class ;
+                                         owl:unionOf ( :Obrigacao
+                                                       :Permissao
+                                                       :Proibicao
+                                                     )
+                                       ] ;
+                   rdfs:subClassOf gufo:IntrinsicMode ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gufo:historicallyDependsOn ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :Especialista
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gufo:inheresIn ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :Norma
+                                   ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##Usuario
-<http://purl.org/net/ethical-ai/meta##Usuario> rdf:type owl:Class ;
-                                               rdfs:subClassOf <http://purl.org/net/ethical-ai/meta##AgenteHumano> ,
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty gufo:participatedIn ;
-                                                                 owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##Acao>
-                                                               ] ,
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty [ owl:inverseOf gufo:mediates
-                                                                                ] ;
-                                                                 owl:someValuesFrom <http://purl.org/net/ethical-ai/meta##EcossistemaDeIA>
-                                                               ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Usuario
+:Usuario rdf:type owl:Class ;
+         rdfs:subClassOf :AgenteHumano ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty gufo:participatedIn ;
+                           owl:someValuesFrom :Acao
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty [ owl:inverseOf gufo:mediates
+                                          ] ;
+                           owl:someValuesFrom :EcossistemaDeIA
+                         ] .
 
 
-###  http://purl.org/net/ethical-ai/meta##Valor
-<http://purl.org/net/ethical-ai/meta##Valor> rdf:type owl:Class ;
-                                             rdfs:subClassOf gufo:Quality ,
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty gufo:historicallyDependsOn ;
-                                                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                               owl:onClass <http://purl.org/net/ethical-ai/meta##Especialista>
-                                                             ] ,
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty gufo:inheresIn ;
-                                                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                               owl:onClass <http://purl.org/net/ethical-ai/meta##Norma>
-                                                             ] .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Valor
+:Valor rdf:type owl:Class ;
+       rdfs:subClassOf gufo:Quality ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty gufo:historicallyDependsOn ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Especialista
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty gufo:inheresIn ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Norma
+                       ] .
 
 
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://purl.org/net/ethical-ai/meta##Acao
-<http://purl.org/net/ethical-ai/meta##Acao> rdf:type owl:NamedIndividual ,
-                                                     gufo:EventType .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Acao
+:Acao rdf:type owl:NamedIndividual ,
+               gufo:EventType .
 
 
-###  http://purl.org/net/ethical-ai/meta##AcaoMoral
-<http://purl.org/net/ethical-ai/meta##AcaoMoral> rdf:type owl:NamedIndividual ,
-                                                          gufo:EventType .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AcaoMoral
+:AcaoMoral rdf:type owl:NamedIndividual ,
+                    gufo:EventType .
 
 
-###  http://purl.org/net/ethical-ai/meta##Agente
-<http://purl.org/net/ethical-ai/meta##Agente> rdf:type owl:NamedIndividual ,
-                                                       gufo:Kind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Agente
+:Agente rdf:type owl:NamedIndividual ,
+                 gufo:Kind .
 
 
-###  http://purl.org/net/ethical-ai/meta##AgenteArtificial
-<http://purl.org/net/ethical-ai/meta##AgenteArtificial> rdf:type owl:NamedIndividual ,
-                                                                 gufo:SubKind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteArtificial
+:AgenteArtificial rdf:type owl:NamedIndividual ,
+                           gufo:SubKind .
 
 
-###  http://purl.org/net/ethical-ai/meta##AgenteHumano
-<http://purl.org/net/ethical-ai/meta##AgenteHumano> rdf:type owl:NamedIndividual ,
-                                                             gufo:SubKind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteHumano
+:AgenteHumano rdf:type owl:NamedIndividual ,
+                       gufo:SubKind .
 
 
-###  http://purl.org/net/ethical-ai/meta##AgenteMoral
-<http://purl.org/net/ethical-ai/meta##AgenteMoral> rdf:type owl:NamedIndividual ,
-                                                            gufo:Role .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteMoral
+:AgenteMoral rdf:type owl:NamedIndividual ,
+                      gufo:Role .
 
 
-###  http://purl.org/net/ethical-ai/meta##AgenteOrganizacional
-<http://purl.org/net/ethical-ai/meta##AgenteOrganizacional> rdf:type owl:NamedIndividual ,
-                                                                     gufo:SubKind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteOrganizacional
+:AgenteOrganizacional rdf:type owl:NamedIndividual ,
+                               gufo:SubKind .
 
 
-###  http://purl.org/net/ethical-ai/meta##AplicacaoDeResponsabilidade
-<http://purl.org/net/ethical-ai/meta##AplicacaoDeResponsabilidade> rdf:type owl:NamedIndividual ,
-                                                                            gufo:EventType .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoDeResponsabilidade
+:AplicacaoDeResponsabilidade rdf:type owl:NamedIndividual ,
+                                      gufo:EventType .
 
 
-###  http://purl.org/net/ethical-ai/meta##AplicacaoNormativa
-<http://purl.org/net/ethical-ai/meta##AplicacaoNormativa> rdf:type owl:NamedIndividual ,
-                                                                   gufo:EventType .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa
+:AplicacaoNormativa rdf:type owl:NamedIndividual ,
+                             gufo:EventType .
 
 
-###  http://purl.org/net/ethical-ai/meta##Beneficencia
-<http://purl.org/net/ethical-ai/meta##Beneficencia> rdf:type owl:NamedIndividual ,
-                                                             gufo:SubKind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Beneficencia
+:Beneficencia rdf:type owl:NamedIndividual ,
+                       gufo:SubKind .
 
 
-###  http://purl.org/net/ethical-ai/meta##EcossistemaDeIA
-<http://purl.org/net/ethical-ai/meta##EcossistemaDeIA> rdf:type owl:NamedIndividual ,
-                                                                gufo:Kind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#EcossistemaDeIA
+:EcossistemaDeIA rdf:type owl:NamedIndividual ,
+                          gufo:Kind .
 
 
-###  http://purl.org/net/ethical-ai/meta##Especialista
-<http://purl.org/net/ethical-ai/meta##Especialista> rdf:type owl:NamedIndividual ,
-                                                             gufo:Role .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Especialista
+:Especialista rdf:type owl:NamedIndividual ,
+                       gufo:Role .
 
 
-###  http://purl.org/net/ethical-ai/meta##Justica
-<http://purl.org/net/ethical-ai/meta##Justica> rdf:type owl:NamedIndividual ,
-                                                        gufo:SubKind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Justica
+:Justica rdf:type owl:NamedIndividual ,
+                  gufo:SubKind .
 
 
-###  http://purl.org/net/ethical-ai/meta##NaoMaleficencia
-<http://purl.org/net/ethical-ai/meta##NaoMaleficencia> rdf:type owl:NamedIndividual ,
-                                                                gufo:SubKind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#NaoMaleficencia
+:NaoMaleficencia rdf:type owl:NamedIndividual ,
+                          gufo:SubKind .
 
 
-###  http://purl.org/net/ethical-ai/meta##Norma
-<http://purl.org/net/ethical-ai/meta##Norma> rdf:type owl:NamedIndividual ,
-                                                      gufo:Kind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Norma
+:Norma rdf:type owl:NamedIndividual ,
+                gufo:Kind .
 
 
-###  http://purl.org/net/ethical-ai/meta##Obrigacao
-<http://purl.org/net/ethical-ai/meta##Obrigacao> rdf:type owl:NamedIndividual ,
-                                                          gufo:SubKind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Obrigacao
+:Obrigacao rdf:type owl:NamedIndividual ,
+                    gufo:SubKind .
 
 
-###  http://purl.org/net/ethical-ai/meta##Omissao
-<http://purl.org/net/ethical-ai/meta##Omissao> rdf:type owl:NamedIndividual ,
-                                                        gufo:EventType .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Omissao
+:Omissao rdf:type owl:NamedIndividual ,
+                  gufo:EventType .
 
 
-###  http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora
-<http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora> rdf:type owl:NamedIndividual ,
-                                                                      gufo:Role .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#OrganizacaoReguladora
+:OrganizacaoReguladora rdf:type owl:NamedIndividual ,
+                                gufo:Role .
 
 
-###  http://purl.org/net/ethical-ai/meta##Permissao
-<http://purl.org/net/ethical-ai/meta##Permissao> rdf:type owl:NamedIndividual ,
-                                                          gufo:SubKind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Permissao
+:Permissao rdf:type owl:NamedIndividual ,
+                    gufo:SubKind .
 
 
-###  http://purl.org/net/ethical-ai/meta##Proibicao
-<http://purl.org/net/ethical-ai/meta##Proibicao> rdf:type owl:NamedIndividual ,
-                                                          gufo:SubKind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Proibicao
+:Proibicao rdf:type owl:NamedIndividual ,
+                    gufo:SubKind .
 
 
-###  http://purl.org/net/ethical-ai/meta##QuebraNormativa
-<http://purl.org/net/ethical-ai/meta##QuebraNormativa> rdf:type owl:NamedIndividual ,
-                                                                gufo:SituationType .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#QuebraNormativa
+:QuebraNormativa rdf:type owl:NamedIndividual ,
+                          gufo:SituationType .
 
 
-###  http://purl.org/net/ethical-ai/meta##Responsabilizacao
-<http://purl.org/net/ethical-ai/meta##Responsabilizacao> rdf:type owl:NamedIndividual ,
-                                                                  gufo:Kind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Responsabilizacao
+:Responsabilizacao rdf:type owl:NamedIndividual ,
+                            gufo:Kind .
 
 
-###  http://purl.org/net/ethical-ai/meta##RestricaoDeontica
-<http://purl.org/net/ethical-ai/meta##RestricaoDeontica> rdf:type owl:NamedIndividual ,
-                                                                  gufo:Kind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#RestricaoDeontica
+:RestricaoDeontica rdf:type owl:NamedIndividual ,
+                            gufo:Kind .
 
 
-###  http://purl.org/net/ethical-ai/meta##Usuario
-<http://purl.org/net/ethical-ai/meta##Usuario> rdf:type owl:NamedIndividual ,
-                                                        gufo:Role .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Usuario
+:Usuario rdf:type owl:NamedIndividual ,
+                  gufo:Role .
 
 
-###  http://purl.org/net/ethical-ai/meta##Valor
-<http://purl.org/net/ethical-ai/meta##Valor> rdf:type owl:NamedIndividual ,
-                                                      gufo:Kind .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Valor
+:Valor rdf:type owl:NamedIndividual ,
+                gufo:Kind .
 
 
-###  http://purl.org/net/ethical-ai/meta##interage_com
-<http://purl.org/net/ethical-ai/meta##interage_com> rdf:type owl:NamedIndividual ,
-                                                             gufo:MaterialRelationshipType .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#interage_com
+:interage_com rdf:type owl:NamedIndividual ,
+                       gufo:MaterialRelationshipType .
 
 
-###  http://purl.org/net/ethical-ai/meta##responsabiliza
-<http://purl.org/net/ethical-ai/meta##responsabiliza> rdf:type owl:NamedIndividual ,
-                                                               gufo:MaterialRelationshipType .
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#responsabiliza
+:responsabiliza rdf:type owl:NamedIndividual ,
+                         gufo:MaterialRelationshipType .
 
 
 #################################################################
 #    Annotations
 #################################################################
 
-<http://purl.org/net/ethical-ai/meta##Acao> rdfs:label "Acao"@en .
+:Acao rdfs:label "Acao"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##AcaoMoral> rdfs:label "AcaoMoral"@en .
+:AcaoMoral rdfs:label "AcaoMoral"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Agente> rdfs:label "Agente"@en .
+:Agente rdfs:label "Agente"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##AgenteArtificial> rdfs:label "AgenteArtificial"@en .
+:AgenteArtificial rdfs:label "AgenteArtificial"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##AgenteHumano> rdfs:label "AgenteHumano"@en .
+:AgenteHumano rdfs:label "AgenteHumano"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##AgenteMoral> rdfs:label "AgenteMoral"@en .
+:AgenteMoral rdfs:label "AgenteMoral"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##AgenteOrganizacional> rdfs:label "AgenteOrganizacional"@en .
+:AgenteOrganizacional rdfs:label "AgenteOrganizacional"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##AplicacaoDeResponsabilidade> rdfs:label "AplicacaoDeResponsabilidade"@en .
+:AplicacaoDeResponsabilidade rdfs:label "AplicacaoDeResponsabilidade"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##AplicacaoNormativa> rdfs:label "AplicacaoNormativa"@en .
+:AplicacaoNormativa rdfs:label "AplicacaoNormativa"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Beneficencia> rdfs:label "Beneficencia"@en .
+:Beneficencia rdfs:label "Beneficencia"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##EcossistemaDeIA> rdfs:label "EcossistemaDeIA"@en .
+:EcossistemaDeIA rdfs:label "EcossistemaDeIA"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Especialista> rdfs:label "Especialista"@en .
+:Especialista rdfs:label "Especialista"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Justica> rdfs:label "Justica"@en .
+:Justica rdfs:label "Justica"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##NaoMaleficencia> rdfs:label "NaoMaleficencia"@en .
+:NaoMaleficencia rdfs:label "NaoMaleficencia"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Norma> rdfs:label "Norma"@en .
+:Norma rdfs:label "Norma"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Obrigacao> rdfs:label "Obrigacao"@en .
+:Obrigacao rdfs:label "Obrigacao"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Omissao> rdfs:label "Omissao"@en .
+:Omissao rdfs:label "Omissao"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##OrganizacaoReguladora> rdfs:label "OrganizacaoReguladora"@en .
+:OrganizacaoReguladora rdfs:label "OrganizacaoReguladora"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Permissao> rdfs:label "Permissao"@en .
+:Permissao rdfs:label "Permissao"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Proibicao> rdfs:label "Proibicao"@en .
+:Proibicao rdfs:label "Proibicao"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##QuebraNormativa> rdfs:label "QuebraNormativa"@en .
+:QuebraNormativa rdfs:label "QuebraNormativa"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Responsabilizacao> rdfs:label "Responsabilizacao"@en .
+:Responsabilizacao rdfs:label "Responsabilizacao"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##RestricaoDeontica> rdfs:label "RestricaoDeontica"@en .
+:RestricaoDeontica rdfs:label "RestricaoDeontica"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Usuario> rdfs:label "Usuario"@en .
+:Usuario rdfs:label "Usuario"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##Valor> rdfs:label "Valor"@en .
+:Valor rdfs:label "Valor"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##interage_com> rdfs:label "interage_com"@en .
+:interage_com rdfs:label "interage_com"@en .
 
 
-<http://purl.org/net/ethical-ai/meta##responsabiliza> rdfs:label "responsabiliza"@en .
+:responsabiliza rdfs:label "responsabiliza"@en .
 
 
 #################################################################
@@ -554,17 +545,17 @@
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( <http://purl.org/net/ethical-ai/meta##AgenteArtificial>
-                <http://purl.org/net/ethical-ai/meta##AgenteHumano>
-                <http://purl.org/net/ethical-ai/meta##AgenteOrganizacional>
+  owl:members ( :AgenteArtificial
+                :AgenteHumano
+                :AgenteOrganizacional
               )
 ] .
 
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( <http://purl.org/net/ethical-ai/meta##Obrigacao>
-                <http://purl.org/net/ethical-ai/meta##Permissao>
-                <http://purl.org/net/ethical-ai/meta##Proibicao>
+  owl:members ( :Obrigacao
+                :Permissao
+                :Proibicao
               )
 ] .
 
