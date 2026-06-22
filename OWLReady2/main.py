@@ -53,6 +53,7 @@ print("=" * 60)
 
 with onto:
     ClassAcao = obter_classe("Acao")
+    ClassAcaoMoral = obter_classe("AcaoMoral")
     ClassOmissao = obter_classe("Omissao")
     ClassResponsabilizacao = obter_classe("Responsabilizacao")
     ClassOrganizacaoReguladora = obter_classe("OrganizacaoReguladora")
@@ -132,26 +133,31 @@ consultas_sparql = {
     # --- GRUPO 1: Fundamentos da Agência Moral ---
     "QC1 (Agentes Morais)": f"""
         SELECT ?agente ?tipo WHERE {{
-            ?agente <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?tipo .
-            FILTER (?tipo IN (<{iri_segura(ClassAgenteArtificial)}>, <{iri_segura(ClassAgenteHumano)}>, <{iri_segura(ClassAgenteOrganizacional)}>))
+            ?agente rdf:type ?tipo .
+            FILTER (?tipo IN (
+            <{iri_segura(ClassAgenteArtificial)}>, 
+            <{iri_segura(ClassAgenteHumano)}>, 
+            <{iri_segura(ClassAgenteOrganizacional)}>))
         }}
     """,
     "QC2 e QC3 (Ações Morais e Omissões)": f"""
         SELECT ?acao_ou_omissao ?tipo WHERE {{
-            ?acao_ou_omissao <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?tipo .
-            FILTER (?tipo IN (<{iri_segura(ClassAcao)}>, <{iri_segura(ClassOmissao)}>))
+            ?acao_ou_omissao rdf:type ?tipo .
+            FILTER (?tipo IN (
+            <{iri_segura(ClassAcaoMoral)}>, 
+            <{iri_segura(ClassOmissao)}>))
         }}
     """,
 
     # --- GRUPO 2: Ecossistema de IA e Responsabilidade ---
     "QC4 (Ecossistema de IA)": f"""
         SELECT ?ecossistema WHERE {{
-            ?ecossistema <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <{iri_segura(ClassEcossistema)}> .
+            ?ecossistema rdf:type <{iri_segura(ClassEcossistema)}> .
         }}
     """,
     "QC5 (Responsabilidade no Ecossistema)": f"""
         SELECT ?responsabilidade WHERE {{
-            ?responsabilidade <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <{iri_segura(ClassResponsabilizacao)}> .
+            ?responsabilidade rdf:type <{iri_segura(ClassResponsabilizacao)}> .
         }}
     """,
     "QC6 e QC7 (Atribuição de Responsabilidade)": f"""
@@ -164,36 +170,43 @@ consultas_sparql = {
     # --- GRUPO 3: Normas, Valores e Deôntica ---
     "QC8 (Normas Éticas Gerais)": f"""
         SELECT ?norma WHERE {{
-            ?norma <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <{iri_segura(ClassNorma)}> .
+            ?norma rdf:type <{iri_segura(ClassNorma)}> .
         }}
     """,
     "QC9 (Componentes Lógicos de Normas)": f"""
         SELECT ?componente ?tipo WHERE {{
-            ?componente <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?tipo .
-            FILTER (?tipo IN (<{iri_segura(ClassObrigacao)}>, <{iri_segura(ClassPermissao)}>, <{iri_segura(ClassProibicao)}>))
+            ?componente rdf:type ?tipo .
+            FILTER (?tipo IN (
+            <{iri_segura(ClassObrigacao)}>, 
+            <{iri_segura(ClassPermissao)}>, 
+            <{iri_segura(ClassProibicao)}>))
         }}
     """,
     "QC10 e QC13 (Aplicação e Quebra de Normas aplicadas à Ações)": f"""
         SELECT ?evento_normativo ?tipo WHERE {{
-            ?evento_normativo <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?tipo .
-            FILTER (?tipo IN (<{iri_segura(ClassAplicacaoNormativa)}>, <{iri_segura(ClassQuebraNormativa)}>))
+            ?evento_normativo rdf:type ?tipo .
+            FILTER (?tipo IN (
+            <{iri_segura(ClassAplicacaoNormativa)}>, 
+            <{iri_segura(ClassQuebraNormativa)}>))
         }}
     """,
     "QC11 (Valores Éticos e Subclasses)": f"""
         SELECT ?valor ?tipo_valor WHERE {{
-            ?valor <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?tipo_valor .
-            ?tipo_valor <http://www.w3.org/2000/01/rdf-schema#subClassOf>* <{iri_segura(ClassValor)}> .
+            ?valor rdf:type ?tipo_valor .
+            ?tipo_valor rdf:subClassOf* <{iri_segura(ClassValor)}> .
         }}
     """,
     "QC12 (Quem define valores - Especialistas e Órgãos Reguladores)": f"""
         SELECT ?definidor ?tipo WHERE {{
-            ?definidor <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?tipo .
-            FILTER (?tipo IN (<{iri_segura(ClassOrganizacaoReguladora)}>, <{iri_segura(ClassEspecialista)}>))
+            ?definidor rdf:type ?tipo .
+            FILTER (?tipo IN (
+            <{iri_segura(ClassOrganizacaoReguladora)}>, 
+            <{iri_segura(ClassEspecialista)}>))
         }}
     """,
     "QC14 (Restrições Deônticas Genéricas)": f"""
         SELECT ?restricao WHERE {{
-            ?restricao <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <{iri_segura(ClassRestricao)}> .
+            ?restricao rdf:type <{iri_segura(ClassRestricao)}> .
         }}
     """
 }
@@ -219,6 +232,7 @@ def executar_bloco_testes(titulo_modelo):
 
 
 def executar_consultas_owlready():
+    print(f"\n" + "-" * 45)
     imprimir_resultados_api(
         "Agentes Artificiais",
         ClassAgenteArtificial
