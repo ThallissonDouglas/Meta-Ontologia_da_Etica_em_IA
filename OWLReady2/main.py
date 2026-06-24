@@ -52,6 +52,10 @@ print(" Povoando a Ontologia com Instâncias de Teste...")
 print("=" * 60)
 
 with onto:
+    # ================================================================
+    # Pegando as classes
+    # ================================================================
+
     ClassAgente      = obter_classe("Agente")
     ClassAgenteMoral = obter_classe("AgenteMoral")
 
@@ -64,6 +68,8 @@ with onto:
     ClassAgenteOrganizacional  = obter_classe("AgenteOrganizacional")
     ClassOrganizacaoReguladora = obter_classe("OrganizacaoReguladora")
 
+    ClassRestricaoDeontica = obter_classe("RestricaoDeontica")
+
     ClassObrigacao = obter_classe("Obrigacao")
     ClassPermissao = obter_classe("Permissao")
     ClassProibicao = obter_classe("Proibicao")
@@ -72,7 +78,6 @@ with onto:
 
     ClassNorma = obter_classe("Norma")
 
-    ClassRestricaoDeontica = obter_classe("RestricaoDeontica")
     ClassAcao      = obter_classe("Acao")
     ClassAcaoMoral = obter_classe("AcaoMoral")
     ClassOmissao   = obter_classe("Omissao")
@@ -90,97 +95,194 @@ with onto:
     PropResponsabiliza = getattr(onto, "responsabiliza", None)
 
 
-    agente_especialista = ClassEspecialista("Especialista_Em_Filosofia")
+    # ================================================================
+    # Populando a Ontologia
+    #          e
+    #  Definindo Relacoes
+    # ================================================================
 
+    decidir_candidato_mais_qualificado = ClassAcao("Decidir_Candidato_Mais_Qualificado")
 
-    valor_justica = ClassValor("Justica")
-    valor_beneficencia = ClassValor("Beneficencia")
-    valor_nao_maleficencia = ClassValor("Nao_Maleficencia")
+    revelar_banco_de_dados_de_usuarios = ClassAcao("Revelar_Banco_De_Dados_De_Usuarios")
 
-    hasattr(valor_justica, "inheresIn")
-    hasattr(valor_beneficencia, "inheresIn")
-
-    permissao = ClassPermissao("Permissao")
-    obrigacao = ClassObrigacao("Obrigacao")
-    proibicao = ClassProibicao("Proibicao")
-
-    hasattr(permissao, "inheresIn")
-    hasattr(obrigacao, "inheresIn")
-    hasattr(proibicao, "inheresIn")
+    negar_realizacao_de_acao = ClassOmissao("Negar_Realizacao_De_Acao")
 
 
 
+    agente_artificial_1 = ClassAgenteArtificial("Artificial_1")
+    hasattr(agente_artificial_1, "participatedIn")
+    agente_artificial_1.participatedIn.append(decidir_candidato_mais_qualificado)
+
+    agente_artificial_2 = ClassAgenteArtificial("Artificial_2")
+    hasattr(agente_artificial_2, "participatedIn")
+    agente_artificial_2.participatedIn.append(revelar_banco_de_dados_de_usuarios)
+
+
+
+    usuario_1 = ClassUsuario("Usuario_1")
+    hasattr(usuario_1, "participatedIn")
+    usuario_1.participatedIn.append(decidir_candidato_mais_qualificado)
+    hasattr(usuario_1, "interage_com")
+    usuario_1.interage_com.append(agente_artificial_1)
+
+    usuario_2 = ClassUsuario("Usuario_2")
+    hasattr(usuario_2, "participatedIn")
+    usuario_2.participatedIn.append(revelar_banco_de_dados_de_usuarios)
+    hasattr(usuario_2, "interage_com")
+    usuario_2.interage_com.append(agente_artificial_2)
+
+
+
+    ecossistema_1 = ClassEcossistemaDeIA("Ecossistema_1")
+    hasattr(ecossistema_1, "mediates")
+    ecossistema_1.mediates.append(usuario_1)
+    ecossistema_1.mediates.append(agente_artificial_1)
+    hasattr(ecossistema_1, "manifestedIn")
+    ecossistema_1.manifestedIn.append(decidir_candidato_mais_qualificado)
+
+    ecossistema_2 = ClassEcossistemaDeIA("Ecossistema_2")
+    hasattr(ecossistema_2, "mediates")
+    ecossistema_2.mediates.append(usuario_2)
+    ecossistema_2.mediates.append(agente_artificial_2)
+    hasattr(ecossistema_2, "manifestedIn")
+    ecossistema_2.manifestedIn.append(revelar_banco_de_dados_de_usuarios)
+
+
+
+    especialista_filosofo = ClassEspecialista("Especialista_Filosofo")
+
+
+
+    valor_nao_maleficencia = ClassValor("Nao_Maleficencia1")
+    valor_justica = ClassValor("Justica1")
+    valor_beneficencia = ClassValor("Beneficencia1")
+
+    hasattr(valor_nao_maleficencia, "historicallyDependsOn")
+    valor_nao_maleficencia.historicallyDependsOn.append(especialista_filosofo)
+
+    hasattr(valor_justica, "historicallyDependsOn")
+    valor_justica.historicallyDependsOn.append(especialista_filosofo)
+
+    hasattr(valor_beneficencia, "historicallyDependsOn")
+    valor_beneficencia.historicallyDependsOn.append(especialista_filosofo)
+
+
+    restricao_deontica = ClassRestricaoDeontica("Restricao_Deontica")
+    hasattr(restricao_deontica, "historicallyDependsOn")
+    restricao_deontica.historicallyDependsOn.append(especialista_filosofo)
+
+
+
+    permissao = ClassPermissao("Deontica_Permissao")
+
+    obrigacao = ClassObrigacao("Deontica_Obrigacao")
+
+    proibicao = ClassProibicao("Deontica_Proibicao")
+    hasattr(proibicao, "manifestedIn")
+    proibicao.manifestedIn.append(negar_realizacao_de_acao)
+
+
+
+    aplicacao_normativa_1 = ClassAplicacaoNormativa("Aplicacao_Normativa_1")
+
+    aplicacao_normativa_2 = ClassAplicacaoNormativa("Aplicacao_Normativa_2")
 
 
 
     norma_imparcialidade = ClassNorma("Seja_Imparcial_Em_Suas_Decisoes")
-    norma_privacidade = ClassNorma("Nao_Revelar_Dados_Pessoais_De_Usuarios")
-
     hasattr(norma_imparcialidade, "mediates")
+    norma_imparcialidade.mediates.append(usuario_1)
+    norma_imparcialidade.mediates.append(agente_artificial_1)
+    hasattr(norma_imparcialidade, "historicallyDependsOn")
+    norma_imparcialidade.historicallyDependsOn.append(especialista_filosofo)
+    hasattr(norma_imparcialidade, "manifestedIn")
+    norma_imparcialidade.manifestedIn.append(ClassAcaoMoral("Decidir_Imparcialmente"))
+
+
+
+    norma_privacidade = ClassNorma("Nao_Revelar_Dados_Pessoais_De_Usuarios")
     hasattr(norma_privacidade, "mediates")
+    norma_privacidade.mediates.append(usuario_2)
+    norma_privacidade.mediates.append(agente_artificial_2)
 
-    obrigacao.inheresIn.append(norma_imparcialidade)
-    proibicao.inheresIn.append(norma_privacidade)
+    hasattr(norma_privacidade, "historicallyDependsOn")
+    norma_privacidade.historicallyDependsOn.append(especialista_filosofo)
 
-    valor_justica.inheresIn.append(norma_imparcialidade)
-    valor_nao_maleficencia.inheresIn.append(norma_privacidade)
+    hasattr(norma_privacidade, "manifestedIn")
+    norma_privacidade.manifestedIn.append(ClassAcaoMoral("Proibir_Acesso_A_Dados_Pessoais"))
 
-
-
-
-
-
-    agente_artificial = None
-    agente_humano = None
-    agente_organizacional = None
-
-    if ClassAgenteArtificial:
-        agente_artificial = ClassAgenteArtificial("SRI_Robo_Medico")
-        agente_artificial = ClassAgenteArtificial("ChatBot")
+    hasattr(norma_privacidade, "wasCreatedIn")
 
 
 
-    if ClassAgenteHumano:
-        agente_humano = ClassAgenteHumano("Dr_Ana_Silva_Auditora")
+    hasattr(obrigacao, "inheresIn")
+    obrigacao.inheresIn = norma_imparcialidade
 
-    if ClassEcossistemaDeIA:
-        ClassEcossistemaDeIA("Ambiente_Algoritmico_Financeiro")
+    hasattr(proibicao, "inheresIn")
+    proibicao.inheresIn = norma_privacidade
 
-    if ClassNorma:
-        ClassNorma("Diretriz_de_Transparencia_Algoritmica")
 
-    if ClassValor:
-        ClassValor("Principio_da_Equidade_Social")
 
-    if ClassRestricaoDeontica:
-        ClassRestricaoDeontica("Proibicao_de_Decisao_Autonoma_Letal")
+    hasattr(valor_justica, "inheresIn")
+    valor_justica.inheresIn = norma_imparcialidade
 
-    if ClassAcao:
-        ClassAcao("Decisao_de_Aprovacao_de_Credito")
+    hasattr(valor_nao_maleficencia, "inheresIn")
+    valor_nao_maleficencia.inheresIn = norma_privacidade
 
-    if ClassResponsabilizacao:
-        ClassResponsabilizacao("Processo_Auditoria_Algoritmica_001")
 
-    if ClassObrigacao:
-        ClassObrigacao("Obrigacao_de_Explicabilidade")
 
-    if ClassAplicacaoNormativa:
-        ClassAplicacaoNormativa("Validacao_de_Vies_Positiva")
-
-    if ClassQuebraNormativa:
-        ClassQuebraNormativa("Vazamento_de_Dados_Nao_Autorizado")
-
-    organizacao_reguladora = None
-
-    if ClassOrganizacaoReguladora:
-        organizacao_reguladora = ClassOrganizacaoReguladora("Comite_Europeu_de_Etica")
-
-    if (
-            organizacao_reguladora
-            and agente_artificial
-            and hasattr(organizacao_reguladora, "responsabiliza")
-    ):
-        organizacao_reguladora.responsabiliza.append(agente_artificial)
+    #
+    # agente_artificial = None
+    # agente_humano = None
+    # agente_organizacional = None
+    #
+    # if ClassAgenteArtificial:
+    #     agente_artificial = ClassAgenteArtificial("SRI_Robo_Medico")
+    #     agente_artificial = ClassAgenteArtificial("ChatBot")
+    #
+    #
+    #
+    # if ClassAgenteHumano:
+    #     agente_humano = ClassAgenteHumano("Dr_Ana_Silva_Auditora")
+    #
+    # if ClassEcossistemaDeIA:
+    #     ClassEcossistemaDeIA("Ambiente_Algoritmico_Financeiro")
+    #
+    # if ClassNorma:
+    #     ClassNorma("Diretriz_de_Transparencia_Algoritmica")
+    #
+    # if ClassValor:
+    #     ClassValor("Principio_da_Equidade_Social")
+    #
+    # if ClassRestricaoDeontica:
+    #     ClassRestricaoDeontica("Proibicao_de_Decisao_Autonoma_Letal")
+    #
+    # if ClassAcao:
+    #     ClassAcao("Decisao_de_Aprovacao_de_Credito")
+    #
+    # if ClassResponsabilizacao:
+    #     ClassResponsabilizacao("Processo_Auditoria_Algoritmica_001")
+    #
+    # if ClassObrigacao:
+    #     ClassObrigacao("Obrigacao_de_Explicabilidade")
+    #
+    # if ClassAplicacaoNormativa:
+    #     ClassAplicacaoNormativa("Validacao_de_Vies_Positiva")
+    #
+    # if ClassQuebraNormativa:
+    #     ClassQuebraNormativa("Vazamento_de_Dados_Nao_Autorizado")
+    #
+    # organizacao_reguladora = None
+    #
+    # if ClassOrganizacaoReguladora:
+    #     organizacao_reguladora = ClassOrganizacaoReguladora("Comite_Europeu_de_Etica")
+    #
+    # if (
+    #         organizacao_reguladora
+    #         and agente_artificial
+    #         and hasattr(organizacao_reguladora, "responsabiliza")
+    # ):
+    #     organizacao_reguladora.responsabiliza.append(agente_artificial)
 
 
 print(" Povoamento concluído com sucesso!")
@@ -306,6 +408,21 @@ def executar_consultas_owlready():
     )
 
     imprimir_resultados_api(
+        "Acoes",
+        ClassAcao
+    )
+
+    imprimir_resultados_api(
+        "Acoes Morais",
+        ClassAcaoMoral
+    )
+
+    imprimir_resultados_api(
+        "Omissoes",
+        ClassOmissao
+    )
+
+    imprimir_resultados_api(
         "Normas",
         ClassNorma
     )
@@ -347,7 +464,7 @@ def executar_consultas_owlready():
 #
 # executar_bloco_testes("ASSERTED MODEL")
 #
-# executar_consultas_owlready()
+executar_consultas_owlready()
 #
 # asserted_agentes_morais = len(
 #     listar_instancias(ClassAgenteMoral)
