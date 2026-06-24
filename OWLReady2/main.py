@@ -153,16 +153,15 @@ with onto:
 
 
 
-    valor_nao_maleficencia = ClassValor("Nao_Maleficencia1")
-    valor_justica = ClassValor("Justica1")
-    valor_beneficencia = ClassValor("Beneficencia1")
-
+    valor_nao_maleficencia = ClassValor("Nao_Maleficencia")
     hasattr(valor_nao_maleficencia, "historicallyDependsOn")
     valor_nao_maleficencia.historicallyDependsOn.append(especialista_filosofo)
 
+    valor_justica = ClassValor("Justica")
     hasattr(valor_justica, "historicallyDependsOn")
     valor_justica.historicallyDependsOn.append(especialista_filosofo)
 
+    valor_beneficencia = ClassValor("Beneficencia")
     hasattr(valor_beneficencia, "historicallyDependsOn")
     valor_beneficencia.historicallyDependsOn.append(especialista_filosofo)
 
@@ -189,14 +188,49 @@ with onto:
 
 
 
+    decidir_imparcialmente = ClassAcaoMoral("Decidir_Imparcialmente")
+
+    proibir_acesso_a_dados_pessoais = ClassAcaoMoral("Proibir_Acesso_A_Dados_Pessoais")
+
+
+
+    hasattr(aplicacao_normativa_1, "contributedToTrigger")
+    aplicacao_normativa_1.contributedToTrigger.append(decidir_imparcialmente)
+
+    hasattr(aplicacao_normativa_2, "contributedToTrigger")
+    aplicacao_normativa_2.contributedToTrigger.append(proibir_acesso_a_dados_pessoais)
+
+
+
+    hasattr(agente_artificial_1, "participatedIn")
+    agente_artificial_1.participatedIn.append(decidir_imparcialmente)
+
+    hasattr(usuario_1, "participatedIn")
+    usuario_1.participatedIn.append(decidir_imparcialmente)
+
+
+
+    hasattr(agente_artificial_2, "participatedIn")
+    agente_artificial_2.participatedIn.append(proibir_acesso_a_dados_pessoais)
+
+    hasattr(usuario_2, "participatedIn")
+    usuario_2.participatedIn.append(proibir_acesso_a_dados_pessoais)
+
+
+
     norma_imparcialidade = ClassNorma("Seja_Imparcial_Em_Suas_Decisoes")
     hasattr(norma_imparcialidade, "mediates")
     norma_imparcialidade.mediates.append(usuario_1)
     norma_imparcialidade.mediates.append(agente_artificial_1)
+
     hasattr(norma_imparcialidade, "historicallyDependsOn")
     norma_imparcialidade.historicallyDependsOn.append(especialista_filosofo)
+
     hasattr(norma_imparcialidade, "manifestedIn")
-    norma_imparcialidade.manifestedIn.append(ClassAcaoMoral("Decidir_Imparcialmente"))
+    norma_imparcialidade.manifestedIn.append(decidir_imparcialmente)
+
+    hasattr(norma_imparcialidade, "wasCreatedIn")
+    norma_imparcialidade.wasCreatedIn.append(aplicacao_normativa_1)
 
 
 
@@ -209,9 +243,10 @@ with onto:
     norma_privacidade.historicallyDependsOn.append(especialista_filosofo)
 
     hasattr(norma_privacidade, "manifestedIn")
-    norma_privacidade.manifestedIn.append(ClassAcaoMoral("Proibir_Acesso_A_Dados_Pessoais"))
+    norma_privacidade.manifestedIn.append(proibir_acesso_a_dados_pessoais)
 
     hasattr(norma_privacidade, "wasCreatedIn")
+    norma_privacidade.wasCreatedIn.append(aplicacao_normativa_2)
 
 
 
@@ -231,60 +266,6 @@ with onto:
 
 
 
-    #
-    # agente_artificial = None
-    # agente_humano = None
-    # agente_organizacional = None
-    #
-    # if ClassAgenteArtificial:
-    #     agente_artificial = ClassAgenteArtificial("SRI_Robo_Medico")
-    #     agente_artificial = ClassAgenteArtificial("ChatBot")
-    #
-    #
-    #
-    # if ClassAgenteHumano:
-    #     agente_humano = ClassAgenteHumano("Dr_Ana_Silva_Auditora")
-    #
-    # if ClassEcossistemaDeIA:
-    #     ClassEcossistemaDeIA("Ambiente_Algoritmico_Financeiro")
-    #
-    # if ClassNorma:
-    #     ClassNorma("Diretriz_de_Transparencia_Algoritmica")
-    #
-    # if ClassValor:
-    #     ClassValor("Principio_da_Equidade_Social")
-    #
-    # if ClassRestricaoDeontica:
-    #     ClassRestricaoDeontica("Proibicao_de_Decisao_Autonoma_Letal")
-    #
-    # if ClassAcao:
-    #     ClassAcao("Decisao_de_Aprovacao_de_Credito")
-    #
-    # if ClassResponsabilizacao:
-    #     ClassResponsabilizacao("Processo_Auditoria_Algoritmica_001")
-    #
-    # if ClassObrigacao:
-    #     ClassObrigacao("Obrigacao_de_Explicabilidade")
-    #
-    # if ClassAplicacaoNormativa:
-    #     ClassAplicacaoNormativa("Validacao_de_Vies_Positiva")
-    #
-    # if ClassQuebraNormativa:
-    #     ClassQuebraNormativa("Vazamento_de_Dados_Nao_Autorizado")
-    #
-    # organizacao_reguladora = None
-    #
-    # if ClassOrganizacaoReguladora:
-    #     organizacao_reguladora = ClassOrganizacaoReguladora("Comite_Europeu_de_Etica")
-    #
-    # if (
-    #         organizacao_reguladora
-    #         and agente_artificial
-    #         and hasattr(organizacao_reguladora, "responsabiliza")
-    # ):
-    #     organizacao_reguladora.responsabiliza.append(agente_artificial)
-
-
 print(" Povoamento concluído com sucesso!")
 
 # TRADUÇÃO DAS QUESTÕES DE COMPETÊNCIA
@@ -299,7 +280,7 @@ consultas_sparql = {
             <{iri_segura(ClassAgenteOrganizacional)}>))
         }}
     """,
-    "QC2. Como normas classificam uma ação como uma ação moral?\n QC3. É a omissão um tipo de ação moral?": f"""
+    "QC2. Como normas classificam uma ação como uma ação moral? & QC3. É a omissão um tipo de ação moral?": f"""
         SELECT ?acao_ou_omissao ?tipo WHERE {{
             ?acao_ou_omissao rdf:type ?tipo .
             FILTER (?tipo IN (
@@ -309,17 +290,17 @@ consultas_sparql = {
     """,
 
     # --- GRUPO 2: Ecossistema de IA e Responsabilidade ---
-    "QC4 (Ecossistema de IA)": f"""
+    "QC4. O que é um ecossistema de IA?": f"""
         SELECT ?ecossistema WHERE {{
             ?ecossistema rdf:type <{iri_segura(ClassEcossistemaDeIA)}> .
         }}
     """,
-    "QC5 (Responsabilidade no Ecossistema)": f"""
+    "QC5. O que é a responsabilidade em um ecossistema de IA?": f"""
         SELECT ?responsabilidade WHERE {{
             ?responsabilidade rdf:type <{iri_segura(ClassResponsabilizacao)}> .
         }}
     """,
-    "QC6 e QC7 (Atribuição de Responsabilidade)": f"""
+    "QC6. Como responsabilidades são atribuídas em um ecossistema de IA? & QC7. Quem atribui responsabilidades em um ecossistema de IA?": f"""
         SELECT ?quem_atribui ?agente_responsabilizado WHERE {{
             # Busca especificamente quem aplica a propriedade 'responsabiliza'
             ?quem_atribui <{iri_segura(PropResponsabiliza)}> ?agente_responsabilizado .
@@ -327,12 +308,12 @@ consultas_sparql = {
     """,
 
     # --- GRUPO 3: Normas, Valores e Deôntica ---
-    "QC8 (Normas Éticas Gerais)": f"""
+    "QC8. O que é uma norma ética no contexto da ontologia?": f"""
         SELECT ?norma WHERE {{
             ?norma rdf:type <{iri_segura(ClassNorma)}> .
         }}
     """,
-    "QC9 (Componentes Lógicos de Normas)": f"""
+    "QC9. Quais são os componentes lógicos necessários para definir uma norma ética?": f"""
         SELECT ?componente ?tipo WHERE {{
             ?componente rdf:type ?tipo .
             FILTER (?tipo IN (
@@ -341,7 +322,7 @@ consultas_sparql = {
             <{iri_segura(ClassProibicao)}>))
         }}
     """,
-    "QC10 e QC13 (Aplicação e Quebra de Normas aplicadas à Ações)": f"""
+    "QC10. Qual norma ética se aplica a uma determinada ação? & QC13. Como um valor se relaciona com uma norma ética?": f"""
         SELECT ?evento_normativo ?tipo WHERE {{
             ?evento_normativo rdf:type ?tipo .
             FILTER (?tipo IN (
@@ -349,13 +330,13 @@ consultas_sparql = {
             <{iri_segura(ClassQuebraNormativa)}>))
         }}
     """,
-    "QC11 (Valores Éticos e Subclasses)": f"""
+    "QC11. Quais são os valores éticos?": f"""
         SELECT ?valor ?tipo_valor WHERE {{
             ?valor rdf:type ?tipo_valor .
             ?tipo_valor rdf:subClassOf* <{iri_segura(ClassValor)}> .
         }}
     """,
-    "QC12 (Quem define valores - Especialistas e Órgãos Reguladores)": f"""
+    "QC12. Quem define os valores éticos?": f"""
         SELECT ?definidor ?tipo WHERE {{
             ?definidor rdf:type ?tipo .
             FILTER (?tipo IN (
@@ -363,7 +344,7 @@ consultas_sparql = {
             <{iri_segura(ClassEspecialista)}>))
         }}
     """,
-    "QC14 (Restrições Deônticas Genéricas)": f"""
+    "QC14. Uma determinada ação é obrigatória, permitida ou proibida para um determinado agente?": f"""
         SELECT ?restricao WHERE {{
             ?restricao rdf:type <{iri_segura(ClassRestricaoDeontica)}> .
         }}
@@ -458,37 +439,37 @@ def executar_consultas_owlready():
     )
 
 
-# print("\n" + "=" * 60)
-# print(" CONSULTAS SPARQL - ASSERTED MODEL")
-# print("=" * 60)
-#
-# executar_bloco_testes("ASSERTED MODEL")
-#
+print("\n" + "=" * 60)
+print(" CONSULTAS SPARQL - ASSERTED MODEL")
+print("=" * 60)
+
+executar_bloco_testes("ASSERTED MODEL")
+
 executar_consultas_owlready()
-#
-# asserted_agentes_morais = len(
-#     listar_instancias(ClassAgenteMoral)
-# )
-#
-# try:
-#     sync_reasoner_hermit()
-# except Exception as e:
-#     print(f"Erro ao executar HermiT: {e}")
-#
-#
-# print("\n" + "=" * 60)
-# print(" CONSULTAS SPARQL - INFERRED MODEL")
-# print("=" * 60)
-#
-# executar_bloco_testes("INFERRED MODEL")
-#
-# executar_consultas_owlready()
-#
-# inferred_agentes_morais = len(
-#     listar_instancias(ClassAgenteMoral)
-# )
-#
-# print(
-#     f"\nAgentes Morais inferidos: "
-#     f"{inferred_agentes_morais - asserted_agentes_morais}"
-# )
+
+asserted_agentes_morais = len(
+    listar_instancias(ClassAgenteMoral)
+)
+
+with onto:
+    try:
+        sync_reasoner_hermit()
+    except Exception as e:
+        print(f"Erro ao executar HermiT: {e}")
+
+print("\n" + "=" * 60)
+print(" CONSULTAS SPARQL - INFERRED MODEL")
+print("=" * 60)
+
+executar_bloco_testes("INFERRED MODEL")
+
+executar_consultas_owlready()
+
+inferred_agentes_morais = len(
+    listar_instancias(ClassAgenteMoral)
+)
+
+print(
+    f"\nAgentes Morais inferidos: "
+    f"{inferred_agentes_morais - asserted_agentes_morais}"
+)

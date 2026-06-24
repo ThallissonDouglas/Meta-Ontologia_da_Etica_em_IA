@@ -82,7 +82,7 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#isEventProperPartOf"/>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#broughtAbout"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                 <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa"/>
             </owl:Restriction>
@@ -112,14 +112,6 @@
                     <owl:Restriction>
                         <owl:onProperty>
                             <rdf:Description>
-                                <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#isEventProperPartOf"/>
-                            </rdf:Description>
-                        </owl:onProperty>
-                        <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty>
-                            <rdf:Description>
                                 <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#manifestedIn"/>
                             </rdf:Description>
                         </owl:onProperty>
@@ -132,6 +124,15 @@
                             </rdf:Description>
                         </owl:onProperty>
                         <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteMoral"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#contributedToTrigger"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -257,33 +258,23 @@
     <!-- http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa -->
 
     <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa">
-        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Event"/>
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Situation"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty>
                     <rdf:Description>
-                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#isEventProperPartOf"/>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#broughtAbout"/>
                     </rdf:Description>
                 </owl:onProperty>
-                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Acao"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Acao"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#isEventProperPartOf"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#contributedToTrigger"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
                 <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AcaoMoral"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty>
-                    <rdf:Description>
-                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#wasCreatedIn"/>
-                    </rdf:Description>
-                </owl:onProperty>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Norma"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -324,12 +315,6 @@
 
     <owl:Class rdf:about="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Norma">
         <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Relator"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#wasCreatedIn"/>
-                <owl:someValuesFrom rdf:resource="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty>
@@ -618,7 +603,7 @@
     <!-- http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa -->
 
     <owl:NamedIndividual rdf:about="http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa">
-        <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SituationType"/>
     </owl:NamedIndividual>
     
 

@@ -44,7 +44,7 @@
                         owl:someValuesFrom :Usuario
                       ] ,
                       [ rdf:type owl:Restriction ;
-                        owl:onProperty gufo:isEventProperPartOf ;
+                        owl:onProperty gufo:broughtAbout ;
                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onClass :AplicacaoNormativa
                       ] ,
@@ -60,11 +60,6 @@
 :AcaoMoral rdf:type owl:Class ;
            owl:equivalentClass [ owl:intersectionOf ( :Acao
                                                       [ rdf:type owl:Restriction ;
-                                                        owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf
-                                                                       ] ;
-                                                        owl:someValuesFrom :AplicacaoNormativa
-                                                      ]
-                                                      [ rdf:type owl:Restriction ;
                                                         owl:onProperty [ owl:inverseOf gufo:manifestedIn
                                                                        ] ;
                                                         owl:someValuesFrom :Norma
@@ -73,6 +68,12 @@
                                                         owl:onProperty [ owl:inverseOf gufo:participatedIn
                                                                        ] ;
                                                         owl:someValuesFrom :AgenteMoral
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty [ owl:inverseOf gufo:contributedToTrigger
+                                                                       ] ;
+                                                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass :AplicacaoNormativa
                                                       ]
                                                     ) ;
                                  rdf:type owl:Class
@@ -147,22 +148,17 @@
 
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa
 :AplicacaoNormativa rdf:type owl:Class ;
-                    rdfs:subClassOf gufo:Event ,
+                    rdfs:subClassOf gufo:Situation ,
                                     [ rdf:type owl:Restriction ;
-                                      owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf
+                                      owl:onProperty [ owl:inverseOf gufo:broughtAbout
                                                      ] ;
-                                      owl:someValuesFrom :Acao
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :Acao
                                     ] ,
                                     [ rdf:type owl:Restriction ;
-                                      owl:onProperty gufo:isEventProperPartOf ;
-                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onProperty gufo:contributedToTrigger ;
+                                      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                       owl:onClass :AcaoMoral
-                                    ] ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty [ owl:inverseOf gufo:wasCreatedIn
-                                                     ] ;
-                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                      owl:onClass :Norma
                                     ] .
 
 
@@ -189,10 +185,6 @@
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Norma
 :Norma rdf:type owl:Class ;
        rdfs:subClassOf gufo:Relator ,
-                       [ rdf:type owl:Restriction ;
-                         owl:onProperty gufo:wasCreatedIn ;
-                         owl:someValuesFrom :AplicacaoNormativa
-                       ] ,
                        [ rdf:type owl:Restriction ;
                          owl:onProperty [ owl:inverseOf gufo:inheresIn
                                         ] ;
@@ -370,7 +362,7 @@
 
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa
 :AplicacaoNormativa rdf:type owl:NamedIndividual ,
-                             gufo:EventType .
+                             gufo:SituationType .
 
 
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#EcossistemaDeIA
