@@ -14,13 +14,13 @@
 #    Object Properties
 #################################################################
 
-###  http://example.com#interage_com
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#interage_com
 :interage_com rdf:type owl:ObjectProperty ;
               rdfs:domain :Usuario ;
               rdfs:range :AgenteArtificial .
 
 
-###  http://example.com#responsabiliza
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#responsabiliza
 :responsabiliza rdf:type owl:ObjectProperty ;
                 rdfs:domain :OrganizacaoReguladora ;
                 rdfs:range :Agente .
@@ -30,7 +30,7 @@
 #    Classes
 #################################################################
 
-###  http://example.com#Acao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Acao
 :Acao rdf:type owl:Class ;
       rdfs:subClassOf gufo:Event ,
                       [ rdf:type owl:Restriction ;
@@ -44,6 +44,11 @@
                         owl:someValuesFrom :Usuario
                       ] ,
                       [ rdf:type owl:Restriction ;
+                        owl:onProperty gufo:isEventProperPartOf ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :AplicacaoNormativa
+                      ] ,
+                      [ rdf:type owl:Restriction ;
                         owl:onProperty [ owl:inverseOf gufo:participatedIn
                                        ] ;
                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
@@ -51,9 +56,14 @@
                       ] .
 
 
-###  http://example.com#AcaoMoral
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AcaoMoral
 :AcaoMoral rdf:type owl:Class ;
            owl:equivalentClass [ owl:intersectionOf ( :Acao
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf
+                                                                       ] ;
+                                                        owl:someValuesFrom :AplicacaoNormativa
+                                                      ]
                                                       [ rdf:type owl:Restriction ;
                                                         owl:onProperty [ owl:inverseOf gufo:manifestedIn
                                                                        ] ;
@@ -69,7 +79,7 @@
                                ] .
 
 
-###  http://example.com#Agente
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Agente
 :Agente rdf:type owl:Class ;
         rdfs:subClassOf gufo:FunctionalComplex ,
                         [ rdf:type owl:Restriction ;
@@ -79,7 +89,7 @@
                         ] .
 
 
-###  http://example.com#AgenteArtificial
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteArtificial
 :AgenteArtificial rdf:type owl:Class ;
                   rdfs:subClassOf :Agente ,
                                   [ rdf:type owl:Restriction ;
@@ -93,12 +103,12 @@
                                   ] .
 
 
-###  http://example.com#AgenteHumano
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteHumano
 :AgenteHumano rdf:type owl:Class ;
               rdfs:subClassOf :Agente .
 
 
-###  http://example.com#AgenteMoral
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteMoral
 :AgenteMoral rdf:type owl:Class ;
              owl:equivalentClass [ owl:intersectionOf ( :Agente
                                                         [ rdf:type owl:Restriction ;
@@ -110,12 +120,12 @@
                                  ] .
 
 
-###  http://example.com#AgenteOrganizacional
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteOrganizacional
 :AgenteOrganizacional rdf:type owl:Class ;
                       rdfs:subClassOf :Agente .
 
 
-###  http://example.com#AplicacaoDeResponsabilidade
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoDeResponsabilidade
 :AplicacaoDeResponsabilidade rdf:type owl:Class ;
                              rdfs:subClassOf gufo:Event ,
                                              [ rdf:type owl:Restriction ;
@@ -135,9 +145,19 @@
                                              ] .
 
 
-###  http://example.com#AplicacaoNormativa
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa
 :AplicacaoNormativa rdf:type owl:Class ;
                     rdfs:subClassOf gufo:Event ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf
+                                                     ] ;
+                                      owl:someValuesFrom :Acao
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty gufo:isEventProperPartOf ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :AcaoMoral
+                                    ] ,
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty [ owl:inverseOf gufo:wasCreatedIn
                                                      ] ;
@@ -146,7 +166,7 @@
                                     ] .
 
 
-###  http://example.com#EcossistemaDeIA
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#EcossistemaDeIA
 :EcossistemaDeIA rdf:type owl:Class ;
                  rdfs:subClassOf gufo:Relator ,
                                  [ rdf:type owl:Restriction ;
@@ -161,12 +181,12 @@
                                  ] .
 
 
-###  http://example.com#Especialista
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Especialista
 :Especialista rdf:type owl:Class ;
               rdfs:subClassOf :AgenteHumano .
 
 
-###  http://example.com#Norma
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Norma
 :Norma rdf:type owl:Class ;
        rdfs:subClassOf gufo:Relator ,
                        [ rdf:type owl:Restriction ;
@@ -196,12 +216,12 @@
                        ] .
 
 
-###  http://example.com#Obrigacao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Obrigacao
 :Obrigacao rdf:type owl:Class ;
            rdfs:subClassOf :RestricaoDeontica .
 
 
-###  http://example.com#Omissao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Omissao
 :Omissao rdf:type owl:Class ;
          owl:equivalentClass [ owl:intersectionOf ( :AcaoMoral
                                                     [ rdf:type owl:Restriction ;
@@ -214,7 +234,7 @@
                              ] .
 
 
-###  http://example.com#OrganizacaoReguladora
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#OrganizacaoReguladora
 :OrganizacaoReguladora rdf:type owl:Class ;
                        rdfs:subClassOf :AgenteOrganizacional ,
                                        [ rdf:type owl:Restriction ;
@@ -224,22 +244,22 @@
                                        ] .
 
 
-###  http://example.com#Permissao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Permissao
 :Permissao rdf:type owl:Class ;
            rdfs:subClassOf :RestricaoDeontica .
 
 
-###  http://example.com#Proibicao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Proibicao
 :Proibicao rdf:type owl:Class ;
            rdfs:subClassOf :RestricaoDeontica .
 
 
-###  http://example.com#QuebraNormativa
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#QuebraNormativa
 :QuebraNormativa rdf:type owl:Class ;
                  rdfs:subClassOf gufo:Situation .
 
 
-###  http://example.com#Responsabilizacao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Responsabilizacao
 :Responsabilizacao rdf:type owl:Class ;
                    rdfs:subClassOf gufo:Relator ,
                                    [ rdf:type owl:Restriction ;
@@ -254,7 +274,7 @@
                                    ] .
 
 
-###  http://example.com#RestricaoDeontica
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#RestricaoDeontica
 :RestricaoDeontica rdf:type owl:Class ;
                    owl:equivalentClass [ rdf:type owl:Class ;
                                          owl:unionOf ( :Obrigacao
@@ -275,7 +295,7 @@
                                    ] .
 
 
-###  http://example.com#Usuario
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Usuario
 :Usuario rdf:type owl:Class ;
          rdfs:subClassOf :AgenteHumano ,
                          [ rdf:type owl:Restriction ;
@@ -289,7 +309,7 @@
                          ] .
 
 
-###  http://example.com#Valor
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Valor
 :Valor rdf:type owl:Class ;
        rdfs:subClassOf gufo:Quality ,
                        [ rdf:type owl:Restriction ;
@@ -308,122 +328,122 @@
 #    Individuals
 #################################################################
 
-###  http://example.com#Acao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Acao
 :Acao rdf:type owl:NamedIndividual ,
                gufo:EventType .
 
 
-###  http://example.com#AcaoMoral
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AcaoMoral
 :AcaoMoral rdf:type owl:NamedIndividual ,
                     gufo:EventType .
 
 
-###  http://example.com#Agente
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Agente
 :Agente rdf:type owl:NamedIndividual ,
                  gufo:Kind .
 
 
-###  http://example.com#AgenteArtificial
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteArtificial
 :AgenteArtificial rdf:type owl:NamedIndividual ,
                            gufo:SubKind .
 
 
-###  http://example.com#AgenteHumano
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteHumano
 :AgenteHumano rdf:type owl:NamedIndividual ,
                        gufo:SubKind .
 
 
-###  http://example.com#AgenteMoral
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteMoral
 :AgenteMoral rdf:type owl:NamedIndividual ,
                       gufo:Role .
 
 
-###  http://example.com#AgenteOrganizacional
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AgenteOrganizacional
 :AgenteOrganizacional rdf:type owl:NamedIndividual ,
                                gufo:SubKind .
 
 
-###  http://example.com#AplicacaoDeResponsabilidade
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoDeResponsabilidade
 :AplicacaoDeResponsabilidade rdf:type owl:NamedIndividual ,
                                       gufo:EventType .
 
 
-###  http://example.com#AplicacaoNormativa
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AplicacaoNormativa
 :AplicacaoNormativa rdf:type owl:NamedIndividual ,
                              gufo:EventType .
 
 
-###  http://example.com#EcossistemaDeIA
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#EcossistemaDeIA
 :EcossistemaDeIA rdf:type owl:NamedIndividual ,
                           gufo:Kind .
 
 
-###  http://example.com#Especialista
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Especialista
 :Especialista rdf:type owl:NamedIndividual ,
                        gufo:Role .
 
 
-###  http://example.com#Norma
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Norma
 :Norma rdf:type owl:NamedIndividual ,
                 gufo:Kind .
 
 
-###  http://example.com#Obrigacao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Obrigacao
 :Obrigacao rdf:type owl:NamedIndividual ,
                     gufo:SubKind .
 
 
-###  http://example.com#Omissao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Omissao
 :Omissao rdf:type owl:NamedIndividual ,
                   gufo:EventType .
 
 
-###  http://example.com#OrganizacaoReguladora
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#OrganizacaoReguladora
 :OrganizacaoReguladora rdf:type owl:NamedIndividual ,
                                 gufo:Role .
 
 
-###  http://example.com#Permissao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Permissao
 :Permissao rdf:type owl:NamedIndividual ,
                     gufo:SubKind .
 
 
-###  http://example.com#Proibicao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Proibicao
 :Proibicao rdf:type owl:NamedIndividual ,
                     gufo:SubKind .
 
 
-###  http://example.com#QuebraNormativa
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#QuebraNormativa
 :QuebraNormativa rdf:type owl:NamedIndividual ,
                           gufo:SituationType .
 
 
-###  http://example.com#Responsabilizacao
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Responsabilizacao
 :Responsabilizacao rdf:type owl:NamedIndividual ,
                             gufo:Kind .
 
 
-###  http://example.com#RestricaoDeontica
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#RestricaoDeontica
 :RestricaoDeontica rdf:type owl:NamedIndividual ,
                             gufo:Kind .
 
 
-###  http://example.com#Usuario
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Usuario
 :Usuario rdf:type owl:NamedIndividual ,
                   gufo:Role .
 
 
-###  http://example.com#Valor
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Valor
 :Valor rdf:type owl:NamedIndividual ,
                 gufo:Kind .
 
 
-###  http://example.com#interage_com
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#interage_com
 :interage_com rdf:type owl:NamedIndividual ,
                        gufo:MaterialRelationshipType .
 
 
-###  http://example.com#responsabiliza
+###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#responsabiliza
 :responsabiliza rdf:type owl:NamedIndividual ,
                          gufo:MaterialRelationshipType .
 
