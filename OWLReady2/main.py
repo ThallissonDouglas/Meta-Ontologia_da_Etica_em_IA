@@ -52,27 +52,83 @@ print(" Povoando a Ontologia com Instâncias de Teste...")
 print("=" * 60)
 
 with onto:
-    ClassAcao = obter_classe("Acao")
-    ClassAcaoMoral = obter_classe("AcaoMoral")
-    ClassOmissao = obter_classe("Omissao")
-    ClassResponsabilizacao = obter_classe("Responsabilizacao")
-    ClassOrganizacaoReguladora = obter_classe("OrganizacaoReguladora")
+    ClassAgente      = obter_classe("Agente")
+    ClassAgenteMoral = obter_classe("AgenteMoral")
+
+    ClassAgenteHumano = obter_classe("AgenteHumano")
+    ClassUsuario      = obter_classe("Usuario")
     ClassEspecialista = obter_classe("Especialista")
+
+    ClassAgenteArtificial = obter_classe("AgenteArtificial")
+
+    ClassAgenteOrganizacional  = obter_classe("AgenteOrganizacional")
+    ClassOrganizacaoReguladora = obter_classe("OrganizacaoReguladora")
+
     ClassObrigacao = obter_classe("Obrigacao")
     ClassPermissao = obter_classe("Permissao")
     ClassProibicao = obter_classe("Proibicao")
-    ClassAplicacaoNormativa = obter_classe("AplicacaoNormativa")
-    ClassQuebraNormativa = obter_classe("QuebraNormativa")
-    ClassAgenteArtificial = obter_classe("AgenteArtificial")
-    ClassAgenteHumano = obter_classe("AgenteHumano")
-    ClassAgenteOrganizacional = obter_classe("AgenteOrganizacional")
-    ClassAgenteMoral = obter_classe("AgenteMoral")
-    ClassEcossistema = obter_classe("EcossistemaDeIA")
-    ClassNorma = obter_classe("Norma")
+
     ClassValor = obter_classe("Valor")
-    ClassJustica = obter_classe("Justica")
-    ClassRestricao = obter_classe("RestricaoDeontica")
+
+    ClassNorma = obter_classe("Norma")
+
+    ClassRestricaoDeontica = obter_classe("RestricaoDeontica")
+    ClassAcao      = obter_classe("Acao")
+    ClassAcaoMoral = obter_classe("AcaoMoral")
+    ClassOmissao   = obter_classe("Omissao")
+
+    ClassAplicacaoNormativa = obter_classe("AplicacaoNormativa")
+
+    ClassEcossistemaDeIA = obter_classe("EcossistemaDeIA")
+
+    ClassQuebraNormativa = obter_classe("QuebraNormativa")
+
+    ClassResponsabilizacao = obter_classe("Responsabilizacao")
+
+    ClassAplicacaoDeResponsabilidade = obter_classe("AplicacaoDeResponsabilidade")
+
     PropResponsabiliza = getattr(onto, "responsabiliza", None)
+
+
+    agente_especialista = ClassEspecialista("Especialista_Em_Filosofia")
+
+
+    valor_justica = ClassValor("Justica")
+    valor_beneficencia = ClassValor("Beneficencia")
+    valor_nao_maleficencia = ClassValor("Nao_Maleficencia")
+
+    hasattr(valor_justica, "inheresIn")
+    hasattr(valor_beneficencia, "inheresIn")
+
+    permissao = ClassPermissao("Permissao")
+    obrigacao = ClassObrigacao("Obrigacao")
+    proibicao = ClassProibicao("Proibicao")
+
+    hasattr(permissao, "inheresIn")
+    hasattr(obrigacao, "inheresIn")
+    hasattr(proibicao, "inheresIn")
+
+
+
+
+
+
+    norma_imparcialidade = ClassNorma("Seja_Imparcial_Em_Suas_Decisoes")
+    norma_privacidade = ClassNorma("Nao_Revelar_Dados_Pessoais_De_Usuarios")
+
+    hasattr(norma_imparcialidade, "mediates")
+    hasattr(norma_privacidade, "mediates")
+
+    obrigacao.inheresIn.append(norma_imparcialidade)
+    proibicao.inheresIn.append(norma_privacidade)
+
+    valor_justica.inheresIn.append(norma_imparcialidade)
+    valor_nao_maleficencia.inheresIn.append(norma_privacidade)
+
+
+
+
+
 
     agente_artificial = None
     agente_humano = None
@@ -80,23 +136,24 @@ with onto:
 
     if ClassAgenteArtificial:
         agente_artificial = ClassAgenteArtificial("SRI_Robo_Medico")
+        agente_artificial = ClassAgenteArtificial("ChatBot")
+
+
 
     if ClassAgenteHumano:
         agente_humano = ClassAgenteHumano("Dr_Ana_Silva_Auditora")
 
-    if ClassEcossistema:
-        ClassEcossistema("Ambiente_Algoritmico_Financeiro")
+    if ClassEcossistemaDeIA:
+        ClassEcossistemaDeIA("Ambiente_Algoritmico_Financeiro")
 
     if ClassNorma:
         ClassNorma("Diretriz_de_Transparencia_Algoritmica")
 
-    if ClassJustica:
-        ClassJustica("Principio_da_Equidade_Social")
-    elif ClassValor:
+    if ClassValor:
         ClassValor("Principio_da_Equidade_Social")
 
-    if ClassRestricao:
-        ClassRestricao("Proibicao_de_Decisao_Autonoma_Letal")
+    if ClassRestricaoDeontica:
+        ClassRestricaoDeontica("Proibicao_de_Decisao_Autonoma_Letal")
 
     if ClassAcao:
         ClassAcao("Decisao_de_Aprovacao_de_Credito")
@@ -131,7 +188,7 @@ print(" Povoamento concluído com sucesso!")
 # TRADUÇÃO DAS QUESTÕES DE COMPETÊNCIA
 consultas_sparql = {
     # --- GRUPO 1: Fundamentos da Agência Moral ---
-    "QC1 (Agentes Morais)": f"""
+    "QC1. O que faz um dado agente ser classificado como um agente moral?": f"""
         SELECT ?agente ?tipo WHERE {{
             ?agente rdf:type ?tipo .
             FILTER (?tipo IN (
@@ -140,7 +197,7 @@ consultas_sparql = {
             <{iri_segura(ClassAgenteOrganizacional)}>))
         }}
     """,
-    "QC2 e QC3 (Ações Morais e Omissões)": f"""
+    "QC2. Como normas classificam uma ação como uma ação moral?\n QC3. É a omissão um tipo de ação moral?": f"""
         SELECT ?acao_ou_omissao ?tipo WHERE {{
             ?acao_ou_omissao rdf:type ?tipo .
             FILTER (?tipo IN (
@@ -152,7 +209,7 @@ consultas_sparql = {
     # --- GRUPO 2: Ecossistema de IA e Responsabilidade ---
     "QC4 (Ecossistema de IA)": f"""
         SELECT ?ecossistema WHERE {{
-            ?ecossistema rdf:type <{iri_segura(ClassEcossistema)}> .
+            ?ecossistema rdf:type <{iri_segura(ClassEcossistemaDeIA)}> .
         }}
     """,
     "QC5 (Responsabilidade no Ecossistema)": f"""
@@ -206,7 +263,7 @@ consultas_sparql = {
     """,
     "QC14 (Restrições Deônticas Genéricas)": f"""
         SELECT ?restricao WHERE {{
-            ?restricao rdf:type <{iri_segura(ClassRestricao)}> .
+            ?restricao rdf:type <{iri_segura(ClassRestricaoDeontica)}> .
         }}
     """
 }
@@ -275,7 +332,7 @@ def executar_consultas_owlready():
 
     imprimir_resultados_api(
         "Restrições Deônticas",
-        ClassRestricao
+        ClassRestricaoDeontica
     )
 
     imprimir_resultados_api(
@@ -284,37 +341,37 @@ def executar_consultas_owlready():
     )
 
 
-print("\n" + "=" * 60)
-print(" CONSULTAS SPARQL - ASSERTED MODEL")
-print("=" * 60)
-
-executar_bloco_testes("ASSERTED MODEL")
-
-executar_consultas_owlready()
-
-asserted_agentes_morais = len(
-    listar_instancias(ClassAgenteMoral)
-)
-
-try:
-    sync_reasoner_hermit()
-except Exception as e:
-    print(f"Erro ao executar HermiT: {e}")
-
-
-print("\n" + "=" * 60)
-print(" CONSULTAS SPARQL - INFERRED MODEL")
-print("=" * 60)
-
-executar_bloco_testes("INFERRED MODEL")
-
-executar_consultas_owlready()
-
-inferred_agentes_morais = len(
-    listar_instancias(ClassAgenteMoral)
-)
-
-print(
-    f"\nAgentes Morais inferidos: "
-    f"{inferred_agentes_morais - asserted_agentes_morais}"
-)
+# print("\n" + "=" * 60)
+# print(" CONSULTAS SPARQL - ASSERTED MODEL")
+# print("=" * 60)
+#
+# executar_bloco_testes("ASSERTED MODEL")
+#
+# executar_consultas_owlready()
+#
+# asserted_agentes_morais = len(
+#     listar_instancias(ClassAgenteMoral)
+# )
+#
+# try:
+#     sync_reasoner_hermit()
+# except Exception as e:
+#     print(f"Erro ao executar HermiT: {e}")
+#
+#
+# print("\n" + "=" * 60)
+# print(" CONSULTAS SPARQL - INFERRED MODEL")
+# print("=" * 60)
+#
+# executar_bloco_testes("INFERRED MODEL")
+#
+# executar_consultas_owlready()
+#
+# inferred_agentes_morais = len(
+#     listar_instancias(ClassAgenteMoral)
+# )
+#
+# print(
+#     f"\nAgentes Morais inferidos: "
+#     f"{inferred_agentes_morais - asserted_agentes_morais}"
+# )
