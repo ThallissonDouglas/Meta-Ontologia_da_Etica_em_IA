@@ -105,45 +105,56 @@ with onto:
 
     revelar_banco_de_dados_de_usuarios = ClassAcao("Revelar_Banco_De_Dados_De_Usuarios")
 
-    negar_realizacao_de_acao = ClassOmissao("Negar_Realizacao_De_Acao")
-
 
 
     agente_artificial_1 = ClassAgenteArtificial("Artificial_1")
+
     hasattr(agente_artificial_1, "participatedIn")
     agente_artificial_1.participatedIn.append(decidir_candidato_mais_qualificado)
 
+
     agente_artificial_2 = ClassAgenteArtificial("Artificial_2")
+
     hasattr(agente_artificial_2, "participatedIn")
     agente_artificial_2.participatedIn.append(revelar_banco_de_dados_de_usuarios)
 
 
 
     usuario_1 = ClassUsuario("Usuario_1")
+
     hasattr(usuario_1, "participatedIn")
     usuario_1.participatedIn.append(decidir_candidato_mais_qualificado)
+
     hasattr(usuario_1, "interage_com")
     usuario_1.interage_com.append(agente_artificial_1)
 
+
     usuario_2 = ClassUsuario("Usuario_2")
+
     hasattr(usuario_2, "participatedIn")
     usuario_2.participatedIn.append(revelar_banco_de_dados_de_usuarios)
+
     hasattr(usuario_2, "interage_com")
     usuario_2.interage_com.append(agente_artificial_2)
 
 
 
     ecossistema_1 = ClassEcossistemaDeIA("Ecossistema_1")
+
     hasattr(ecossistema_1, "mediates")
     ecossistema_1.mediates.append(usuario_1)
     ecossistema_1.mediates.append(agente_artificial_1)
+
     hasattr(ecossistema_1, "manifestedIn")
     ecossistema_1.manifestedIn.append(decidir_candidato_mais_qualificado)
 
+
     ecossistema_2 = ClassEcossistemaDeIA("Ecossistema_2")
+
     hasattr(ecossistema_2, "mediates")
     ecossistema_2.mediates.append(usuario_2)
     ecossistema_2.mediates.append(agente_artificial_2)
+
     hasattr(ecossistema_2, "manifestedIn")
     ecossistema_2.manifestedIn.append(revelar_banco_de_dados_de_usuarios)
 
@@ -177,14 +188,20 @@ with onto:
     obrigacao = ClassObrigacao("Deontica_Obrigacao")
 
     proibicao = ClassProibicao("Deontica_Proibicao")
-    hasattr(proibicao, "manifestedIn")
-    proibicao.manifestedIn.append(negar_realizacao_de_acao)
 
 
 
     aplicacao_normativa_1 = ClassAplicacaoNormativa("Aplicacao_Normativa_1")
 
     aplicacao_normativa_2 = ClassAplicacaoNormativa("Aplicacao_Normativa_2")
+
+
+
+    hasattr(decidir_candidato_mais_qualificado, "broughtAbout")
+    decidir_candidato_mais_qualificado.broughtAbout.append(aplicacao_normativa_1)
+
+    hasattr(revelar_banco_de_dados_de_usuarios, "broughtAbout")
+    revelar_banco_de_dados_de_usuarios.broughtAbout.append(aplicacao_normativa_2)
 
 
 
@@ -219,34 +236,12 @@ with onto:
 
 
     norma_imparcialidade = ClassNorma("Seja_Imparcial_Em_Suas_Decisoes")
-    hasattr(norma_imparcialidade, "mediates")
-    norma_imparcialidade.mediates.append(usuario_1)
-    norma_imparcialidade.mediates.append(agente_artificial_1)
-
     hasattr(norma_imparcialidade, "historicallyDependsOn")
     norma_imparcialidade.historicallyDependsOn.append(especialista_filosofo)
 
-    hasattr(norma_imparcialidade, "manifestedIn")
-    norma_imparcialidade.manifestedIn.append(decidir_imparcialmente)
-
-    hasattr(norma_imparcialidade, "wasCreatedIn")
-    norma_imparcialidade.wasCreatedIn.append(aplicacao_normativa_1)
-
-
-
     norma_privacidade = ClassNorma("Nao_Revelar_Dados_Pessoais_De_Usuarios")
-    hasattr(norma_privacidade, "mediates")
-    norma_privacidade.mediates.append(usuario_2)
-    norma_privacidade.mediates.append(agente_artificial_2)
-
     hasattr(norma_privacidade, "historicallyDependsOn")
     norma_privacidade.historicallyDependsOn.append(especialista_filosofo)
-
-    hasattr(norma_privacidade, "manifestedIn")
-    norma_privacidade.manifestedIn.append(proibir_acesso_a_dados_pessoais)
-
-    hasattr(norma_privacidade, "wasCreatedIn")
-    norma_privacidade.wasCreatedIn.append(aplicacao_normativa_2)
 
 
 
@@ -340,7 +335,6 @@ consultas_sparql = {
         SELECT ?definidor ?tipo WHERE {{
             ?definidor rdf:type ?tipo .
             FILTER (?tipo IN (
-            <{iri_segura(ClassOrganizacaoReguladora)}>, 
             <{iri_segura(ClassEspecialista)}>))
         }}
     """,
@@ -452,10 +446,11 @@ asserted_agentes_morais = len(
 )
 
 with onto:
-    try:
-        sync_reasoner_hermit()
-    except Exception as e:
-        print(f"Erro ao executar HermiT: {e}")
+    sync_reasoner_hermit()
+# with onto:
+#     try:
+#     except Exception as e:
+#         print(f"Erro ao executar HermiT: {e}")
 
 print("\n" + "=" * 60)
 print(" CONSULTAS SPARQL - INFERRED MODEL")

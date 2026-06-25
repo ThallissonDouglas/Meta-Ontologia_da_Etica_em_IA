@@ -58,26 +58,13 @@
 
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#AcaoMoral
 :AcaoMoral rdf:type owl:Class ;
-           owl:equivalentClass [ owl:intersectionOf ( :Acao
-                                                      [ rdf:type owl:Restriction ;
-                                                        owl:onProperty [ owl:inverseOf gufo:manifestedIn
-                                                                       ] ;
-                                                        owl:someValuesFrom :Norma
-                                                      ]
-                                                      [ rdf:type owl:Restriction ;
-                                                        owl:onProperty [ owl:inverseOf gufo:participatedIn
-                                                                       ] ;
-                                                        owl:someValuesFrom :AgenteMoral
-                                                      ]
-                                                      [ rdf:type owl:Restriction ;
-                                                        owl:onProperty [ owl:inverseOf gufo:contributedToTrigger
-                                                                       ] ;
-                                                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                        owl:onClass :AplicacaoNormativa
-                                                      ]
-                                                    ) ;
-                                 rdf:type owl:Class
-                               ] .
+           rdfs:subClassOf :Acao ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty [ owl:inverseOf gufo:contributedToTrigger
+                                            ] ;
+                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :AplicacaoNormativa
+                           ] .
 
 
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Agente
@@ -150,15 +137,20 @@
 :AplicacaoNormativa rdf:type owl:Class ;
                     rdfs:subClassOf gufo:Situation ,
                                     [ rdf:type owl:Restriction ;
+                                      owl:onProperty gufo:contributedToTrigger ;
+                                      owl:someValuesFrom :AcaoMoral
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
                                       owl:onProperty [ owl:inverseOf gufo:broughtAbout
                                                      ] ;
                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                       owl:onClass :Acao
                                     ] ,
                                     [ rdf:type owl:Restriction ;
-                                      owl:onProperty gufo:contributedToTrigger ;
-                                      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                      owl:onClass :AcaoMoral
+                                      owl:onProperty [ owl:inverseOf gufo:inheresIn
+                                                     ] ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :Norma
                                     ] .
 
 
@@ -184,7 +176,7 @@
 
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Norma
 :Norma rdf:type owl:Class ;
-       rdfs:subClassOf gufo:Relator ,
+       rdfs:subClassOf gufo:Quality ,
                        [ rdf:type owl:Restriction ;
                          owl:onProperty [ owl:inverseOf gufo:inheresIn
                                         ] ;
@@ -196,9 +188,9 @@
                          owl:onClass :Especialista
                        ] ,
                        [ rdf:type owl:Restriction ;
-                         owl:onProperty gufo:mediates ;
-                         owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-                         owl:onClass :Agente
+                         owl:onProperty gufo:inheresIn ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :AplicacaoNormativa
                        ] ,
                        [ rdf:type owl:Restriction ;
                          owl:onProperty [ owl:inverseOf gufo:inheresIn
@@ -215,15 +207,12 @@
 
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Omissao
 :Omissao rdf:type owl:Class ;
-         owl:equivalentClass [ owl:intersectionOf ( :AcaoMoral
-                                                    [ rdf:type owl:Restriction ;
-                                                      owl:onProperty [ owl:inverseOf gufo:manifestedIn
-                                                                     ] ;
-                                                      owl:someValuesFrom :Proibicao
-                                                    ]
-                                                  ) ;
-                               rdf:type owl:Class
-                             ] .
+         rdfs:subClassOf :AcaoMoral ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty [ owl:inverseOf gufo:manifestedIn
+                                          ] ;
+                           owl:someValuesFrom :Proibicao
+                         ] .
 
 
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#OrganizacaoReguladora
@@ -248,7 +237,12 @@
 
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#QuebraNormativa
 :QuebraNormativa rdf:type owl:Class ;
-                 rdfs:subClassOf gufo:Situation .
+                 rdfs:subClassOf gufo:Situation ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gufo:historicallyDependsOn ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :AplicacaoNormativa
+                                 ] .
 
 
 ###  http://purl.org/net/ethical-ai/meta-ontologia-etica-ia#Responsabilizacao
